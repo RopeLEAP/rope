@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Rope", "Rope\Rope.csproj", "{66CD559B-AFBC-4FA8-A809-8027ED34AE40}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RopeTest", "RopeTest\RopeTest.csproj", "{D1846716-7AD9-4B1E-A8A4-3595AEB7EC61}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{66CD559B-AFBC-4FA8-A809-8027ED34AE40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66CD559B-AFBC-4FA8-A809-8027ED34AE40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66CD559B-AFBC-4FA8-A809-8027ED34AE40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1846716-7AD9-4B1E-A8A4-3595AEB7EC61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1846716-7AD9-4B1E-A8A4-3595AEB7EC61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1846716-7AD9-4B1E-A8A4-3595AEB7EC61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1846716-7AD9-4B1E-A8A4-3595AEB7EC61}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
