@@ -16,7 +16,7 @@ namespace Rope
     [Serializable]
     class RopeNode<T>
     {
-        internal const int NodeSize = 2;
+        internal const int NodeSize = 256;
 
         internal static readonly RopeNode<T> emptyRopeNode = new RopeNode<T> { isShared = true, contents = new T[RopeNode<T>.NodeSize] };
 

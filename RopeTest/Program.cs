@@ -7,14 +7,19 @@ namespace RopeTest
     {
         static void Main(string[] args)
         {
-            // ----------------------------- this section contains function calls to the split test class (sid) ----------------------- //
-            SplitTest splitTest = new SplitTest();
-            splitTest.readFiles();
-            splitTest.fillStructures();
+            // ----------------------------- this section contains function calls to the fill and insert test classes (sid) ----------------------- //
+            FillTest fillTest = new FillTest();
+            fillTest.ReadFiles();
+            fillTest.FillLargeStructures();
+            Console.WriteLine("Done! File is FillResults.txt in the repos/repo directory.");
 
-            // test a rope
+            InsertTest insertTest = new InsertTest();
+            insertTest.ReadFiles();
+            insertTest.PrependToLargeStructures();
+            Console.WriteLine("Done! File is InsertResults.txt in the repos/repo directory.");
+
+
             Console.ReadLine();
-
 
             // ----------------------------- this section contains function calls to the concat test class (liz) ---------------------- //
 
