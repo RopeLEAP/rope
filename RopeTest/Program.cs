@@ -23,8 +23,8 @@ namespace RopeTest
             // ----------------------------- this section contains function calls to the concat test class (liz) ---------------------- //
 
             ConcatTest firstConcatTest = new ConcatTest();
-            firstConcatTest.RopeConcatTestCreateRopes();
-
+            //firstConcatTest.RopeConcatTestCreateRopes();
+            firstConcatTest.StringBuilderConcatReadstrings();
 
             // ----------------------------- this section contains function calls to the append test class (kwame) -------------------- //
 

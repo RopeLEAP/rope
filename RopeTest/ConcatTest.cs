@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Wintellect.PowerCollections;
 
 namespace RopeTest
 {
@@ -47,19 +48,19 @@ namespace RopeTest
             //Time Stop
             sw.Stop();
             //Print time
-            Console.WriteLine("Length of new rope: " + ropeConcat.Length + "characters" + ", " + "Runtime: " + sw.ElapsedMilliseconds + "ms");
+            Console.WriteLine("Length of new rope: " + ropeConcat.Length + "characters" + "\n" + "Runtime: " + sw.ElapsedMilliseconds + "ms");
             Console.ReadLine();
         }
 
         //Standard String Concat
-        public void StringConcat()
+        public void StringConcatReadStrings()
         {
             //Set Stopwatch.
             sw.Start();
 
             //Read in Strings.
             //long
-            string warPeace = File.ReadAllText(@"C:\Users\v-elmacc\Documents\RopeProject\warandpeace.txt"); //Close file or methods after this won't run!
+            string warPeace = File.ReadAllText(@"C:\Users\v-elmacc\Documents\RopeProject\warandpeace.txt"); //Close file or methods after this won't run, I think?
             //short
             string foxSentence = "The quick brown fox jumps over the lazy dog.";
 
@@ -70,13 +71,37 @@ namespace RopeTest
             //Time Stop
             sw.Stop();
             //Print time
-            Console.WriteLine("Length of new string: " + stringConcat.Length + "characters" + ", " + "Runtime: " + sw.ElapsedMilliseconds + "ms");
+            Console.WriteLine("Length of new string: " + stringConcat.Length + "characters" + "\n" + "Runtime: " + sw.ElapsedMilliseconds + "ms");
             Console.ReadLine();
 
         }
 
 
         //Concat with StringBuilder.
+        public void StringBuilderConcatReadstrings()
+        {
+            //Set Stopwatch.
+            sw.Start();
+
+           //Read in Strings.
+           //long
+           string warPeace = File.ReadAllText(@"C:\Users\v-elmacc\Documents\RopeProject\warandpeace.txt");//Close file or methods after this won't run!
+           //short
+           string foxSentence = "The quick brown fox jumps over the lazy dog.";
+
+           // Create new stringbuilder.
+           StringBuilder combinedSB = new StringBuilder(warPeace);
+            Console.WriteLine("First length: " + combinedSB.Length);
+            //uses .Append to concat//
+            combinedSB.Append(foxSentence);
+
+            //Time Stop
+            sw.Stop();
+
+            //Print time
+            Console.WriteLine("Length of new stringbuilder: " + combinedSB.Length + " characters" + "\n" + "Runtime: " + sw.ElapsedMilliseconds + " ms");
+            Console.ReadLine();
+        }
 
 
 
