@@ -65,10 +65,12 @@ namespace RopeTest
 
             //Concatenate strings
 
+           string stringConcat = warPeace + foxSentence; 
+
             //Time Stop
             sw.Stop();
             //Print time
-            Console.WriteLine("Length of New Rope: " + ropeConcat.Length + "characters" + ", " + "Runtime: " + sw.ElapsedMilliseconds + "ms");
+            Console.WriteLine("Length of New Rope: " + stringConcat.Length + "characters" + ", " + "Runtime: " + sw.ElapsedMilliseconds + "ms");
             Console.ReadLine();
 
         }
