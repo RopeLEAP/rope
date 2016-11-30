@@ -21,12 +21,33 @@ namespace RopeTest
         //long
         string warPeace = File.ReadAllText(@"C:\Users\v-elmacc\Documents\RopeProject\warandpeace.txt");
         //short
-        string sentence = "The quick brown fox jumps over the lazy dog.";
+        string foxSentence = "The quick brown fox jumps over the lazy dog.";
 
-        //Concatenate with various datatypes and time.
+
 
         //Concat Rope.
+        public void RopeConcatTestCreateRopes()
+        {
+            //Set Stopwatch.
+            sw.Start();
 
+            //Create new char arrays to populate ropes.
+            char[] warPeaceArray = warPeace.ToCharArray();
+            char[] foxSentenceArray = foxSentence.ToCharArray();
+
+            //Fill Ropes.
+            Rope.Rope<char> ropeWarPeace = new Rope.Rope<char>(warPeaceArray, 0, warPeaceArray.Length);
+            Rope.Rope<char> ropeFoxSentence = new Rope.Rope<char>(foxSentenceArray, 0, foxSentenceArray.Length);
+
+            //Concatenate Ropes.
+            Rope.Rope<char> ropeConcat = Rope.Rope<char>.Concat(ropeWarPeace, ropeFoxSentence);
+
+            //Time Stop
+            sw.Stop();
+            //Print time
+            Console.WriteLine("Length of New Rope: " + ropeConcat.Length + "characters" + ", " + "Runtime: " + sw.ElapsedMilliseconds + "ms");
+            Console.ReadLine();
+        }
 
         //Standard String Concat
 

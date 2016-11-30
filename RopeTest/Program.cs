@@ -18,12 +18,12 @@ namespace RopeTest
             insertTest.PrependToLargeStructures();
             Console.WriteLine("Done! File is InsertResults.txt in the repos/repo directory.");
 
-
             Console.ReadLine();
 
             // ----------------------------- this section contains function calls to the concat test class (liz) ---------------------- //
 
-
+            ConcatTest firstConcatTest = new ConcatTest();
+            firstConcatTest.RopeConcatTestCreateRopes();
 
             // ----------------------------- this section contains function calls to the append test class (kwame) -------------------- //
 
