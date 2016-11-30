@@ -9,8 +9,11 @@ namespace RopeTest
         {
             // ----------------------------- this section contains function calls to the split test class (sid) ----------------------- //
             SplitTest splitTest = new SplitTest();
-            splitTest.readSmallFile();
+            splitTest.readFiles();
             splitTest.fillStructures();
+
+            // test a rope
+            Console.ReadLine();
 
 
             // ----------------------------- this section contains function calls to the concat test class (liz) ---------------------- //
