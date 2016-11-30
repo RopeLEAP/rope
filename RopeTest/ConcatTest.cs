@@ -17,11 +17,6 @@ namespace RopeTest
         //Create stopwatch. 
         Stopwatch sw = new Stopwatch();
 
-        //Read in Strings.
-        //long
-        string warPeace = File.ReadAllText(@"C:\Users\v-elmacc\Documents\RopeProject\warandpeace.txt");
-        //short
-        string foxSentence = "The quick brown fox jumps over the lazy dog.";
 
 
 
@@ -30,6 +25,13 @@ namespace RopeTest
         {
             //Set Stopwatch.
             sw.Start();
+
+            //Read in Strings.
+            //long
+            string warPeace = File.ReadAllText(@"C:\Users\v-elmacc\Documents\RopeProject\warandpeace.txt");//Close file or methods after this won't run!
+            //short
+            string foxSentence = "The quick brown fox jumps over the lazy dog.";
+
 
             //Create new char arrays to populate ropes.
             char[] warPeaceArray = warPeace.ToCharArray();
@@ -50,7 +52,26 @@ namespace RopeTest
         }
 
         //Standard String Concat
+        public void StringConcat()
+        {
+            //Set Stopwatch.
+            sw.Start();
 
+            //Read in Strings.
+            //long
+            string warPeace = File.ReadAllText(@"C:\Users\v-elmacc\Documents\RopeProject\warandpeace.txt"); //Close file or methods after this won't run!
+            //short
+            string foxSentence = "The quick brown fox jumps over the lazy dog.";
+
+            //Concatenate strings
+
+            //Time Stop
+            sw.Stop();
+            //Print time
+            Console.WriteLine("Length of New Rope: " + ropeConcat.Length + "characters" + ", " + "Runtime: " + sw.ElapsedMilliseconds + "ms");
+            Console.ReadLine();
+
+        }
 
 
         //Concat with StringBuilder.
