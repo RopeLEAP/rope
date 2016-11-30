@@ -47,7 +47,7 @@ namespace RopeTest
             //Time Stop
             sw.Stop();
             //Print time
-            Console.WriteLine("Length of New Rope: " + ropeConcat.Length + "characters" + ", " + "Runtime: " + sw.ElapsedMilliseconds + "ms");
+            Console.WriteLine("Length of new rope: " + ropeConcat.Length + "characters" + ", " + "Runtime: " + sw.ElapsedMilliseconds + "ms");
             Console.ReadLine();
         }
 
@@ -70,7 +70,7 @@ namespace RopeTest
             //Time Stop
             sw.Stop();
             //Print time
-            Console.WriteLine("Length of New Rope: " + stringConcat.Length + "characters" + ", " + "Runtime: " + sw.ElapsedMilliseconds + "ms");
+            Console.WriteLine("Length of new string: " + stringConcat.Length + "characters" + ", " + "Runtime: " + sw.ElapsedMilliseconds + "ms");
             Console.ReadLine();
 
         }
