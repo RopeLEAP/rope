@@ -17,8 +17,8 @@ namespace RopeTest
         string stringShort;
         string stringLong;
         // path and reader for file I/O
-        string shortFilePath = @"c:\repos\Rope\foxText.txt";
-        string longFilePath = @"c:\repos\Rope\warandpeace.txt";
+        string shortFilePath = @"c:\repos\files\foxText.txt";
+        string longFilePath = @"c:\repos\files\warandpeace.txt";
 
         public void ReadFiles()
         {
@@ -113,7 +113,7 @@ namespace RopeTest
                 lines.Add($"Rope elapsed memory: {ropeMem}");
             }
             // write results
-            using (StreamWriter writeResults = new StreamWriter(@"c:\repos\Rope\InsertResults.txt"))
+            using (StreamWriter writeResults = new StreamWriter(@"c:\repos\files\InsertResults.txt"))
             {
                 foreach (string line in lines)
                 {
