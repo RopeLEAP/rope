@@ -10,7 +10,7 @@ namespace RopeTest
     class InsertTest
     {
         // variables to set iterations and track times
-        int repetitions = 10;
+        int replications = 10;
         int iterations = 10;
         Stopwatch sw = new Stopwatch();
         // variables to hold file contetns
@@ -61,7 +61,7 @@ namespace RopeTest
             // time filling of data structures with initial instance of string
             // ---------------------------------------------------------------
             // fill stringbuilder
-            for (int i = 0; i < repetitions; i++)
+            for (int i = 0; i < iterations; i++)
             {
                 // get pre-fill memory
                 memStart = GC.GetTotalMemory(false);
@@ -80,7 +80,7 @@ namespace RopeTest
 
 
             // fill biglist
-            for (int i = 0; i < repetitions; i++)
+            for (int i = 0; i < iterations; i++)
             {
                 // get pre-fill memory
                 memStart = GC.GetTotalMemory(false);
@@ -99,7 +99,7 @@ namespace RopeTest
             }
 
             // insert into rope
-            for (int i = 0; i < repetitions; i++)
+            for (int i = 0; i < iterations; i++)
             {
                 memStart = GC.GetTotalMemory(false);
                 sw.Start();
