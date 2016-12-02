@@ -18,9 +18,6 @@ namespace RopeTest
         //Create stopwatch. 
         Stopwatch sw = new Stopwatch();
 
-
-
-
         //Concat Rope.
         public void RopeConcatTestCreateRopes()
         {
@@ -106,5 +103,10 @@ namespace RopeTest
 
 
         //Concat with Biglist
+        public void biglistConcatReadstrings()
+        {
+            BigList<char> combinedBL = new BigList<char>()
+        }
+        
     }
 }
