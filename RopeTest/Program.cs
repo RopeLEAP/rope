@@ -12,10 +12,11 @@ namespace RopeTest
             fillTest.ReadFiles();
             fillTest.FillLargeStructures();
             //Console.WriteLine("Done! File is FillResults.txt in the repos/repo directory.");
-            string result = fillTest.GetJson();
-            Console.WriteLine(result);
+            string resultStringBuilder = fillTest.GetJsonSB();
+            string resultBigList = fillTest.GetJsonBL();
+            string resultRope = fillTest.GetJsonR();
 
-
+            Console.WriteLine(resultStringBuilder + " | " + resultBigList + " | " + resultRope);
             //InsertTest insertTest = new InsertTest();
             //insertTest.ReadFiles();
             //insertTest.PrependToLargeStructures();

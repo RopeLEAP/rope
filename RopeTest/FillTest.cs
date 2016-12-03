@@ -28,7 +28,9 @@ namespace RopeTest
         // create an enumerable structure of the long string
         char[] newArray;
         List<string> lines = new List<string>();
-        string jsonLines = "";
+        string jsonLinesSB = "";
+        string jsonLinesBL = "";
+        string jsonLinesR = "";
 
         public void ReadFiles()
         {
@@ -84,13 +86,13 @@ namespace RopeTest
                 //GC.Collect();
                 Export dataExport = new Export(replications, titleStructure, titleMethod, "teststringofmethodology", i, builderFill, builderMem);
                 json = dataExport.CreateJson(dataExport);
-                if (jsonLines == "")
+                if (jsonLinesSB == "")
                 {
-                    jsonLines = json;
+                    jsonLinesSB = json;
                 }
                 else
                 {
-                    jsonLines = jsonLines + ", " + json;
+                    jsonLinesSB = jsonLinesSB + ", " + json;
                 }
             }
 
@@ -112,13 +114,13 @@ namespace RopeTest
                 // GC.Collect();
                 Export dataExport = new Export(replications, titleStructure, titleMethod, "teststringofmethodology", i, builderFill, builderMem);
                 json = dataExport.CreateJson(dataExport);
-                if (jsonLines == "")
+                if (jsonLinesBL == "")
                 {
-                    jsonLines = json;
+                    jsonLinesBL = json;
                 }
                 else
                 {
-                    jsonLines = jsonLines + ", " + json;
+                    jsonLinesBL = jsonLinesBL + ", " + json;
                 }
             }
 
@@ -137,29 +139,42 @@ namespace RopeTest
                 //GC.Collect();
                 Export dataExport = new Export(replications, titleStructure, titleMethod, "teststringofmethodology", i, builderFill, builderMem);
                 json = dataExport.CreateJson(dataExport);
-                if (jsonLines == "")
+                if (jsonLinesR == "")
                 {
-                    jsonLines = json;
+                    jsonLinesR = json;
                 }
                 else
                 {
-                    jsonLines = jsonLines + ", " + json;
+                    jsonLinesR = jsonLinesR + ", " + json;
                 }
             }
             // write results
-            jsonLines = "[" + jsonLines + "]";
+            jsonLinesR = "[" + jsonLinesR + "]";
+            jsonLinesSB = "[" + jsonLinesSB + "]";
+            jsonLinesBL = "[" + jsonLinesBL + "]";
 
             // make it available
             using (StreamWriter writeResults = new StreamWriter(@"c:\repos\files\FillResults.txt"))
             
             {
-                writeResults.WriteLine(jsonLines);
+                writeResults.WriteLine(jsonLinesSB);
+                writeResults.WriteLine(jsonLinesBL);
+                writeResults.WriteLine(jsonLinesR);
             }
 
         }
-        public string GetJson()
+        // methods to call individual results
+        public string GetJsonSB()
         {
-            return jsonLines;
+            return jsonLinesSB;
+        }
+        public string GetJsonBL()
+        {
+            return jsonLinesBL;
+        }
+        public string GetJsonR()
+        {
+            return jsonLinesR;
         }
     }
 }
