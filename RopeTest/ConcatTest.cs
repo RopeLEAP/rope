@@ -100,8 +100,6 @@ namespace RopeTest
             Console.ReadLine();
         }
 
-
-
         //Concat with Biglist
         public void BigListConcatReadStrings()
         {
