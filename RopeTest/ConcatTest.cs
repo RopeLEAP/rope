@@ -12,8 +12,8 @@ namespace RopeTest
     class ConcatTest
     {
         // variables to set iterations and track times
-        int operationIts = 1000;
-        int collectionIts = 100000;
+        int operationIts = 1000;//Replecations
+        int collectionIts = 100000; //itirations
 
         //Create stopwatch. 
         Stopwatch sw = new Stopwatch();
