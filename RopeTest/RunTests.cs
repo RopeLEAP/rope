@@ -8,7 +8,7 @@ namespace RopeTest
 {
     public abstract class RunTests
     {
-        public abstract Structure { get; set; }
+
 
     }
 }
