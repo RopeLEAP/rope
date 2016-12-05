@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -10,8 +11,8 @@ namespace RopeTest
     public class FillTest
     {
         // variables to set iterations and track times
-        int repetitions = 10;
-        int iterations = 10;
+        public int replications = 1;
+        public double iterations = 10;
         Stopwatch sw = new Stopwatch();
         // variables to hold file contetns
         string stringShort;
@@ -19,6 +20,17 @@ namespace RopeTest
         // path and reader for file I/O
         string shortFilePath = @"c:\repos\files\foxText.txt";
         string longFilePath = @"c:\repos\files\warandpeace.txt";
+        // metadata information
+        public string titleMethod = "Initial Fill";
+        public string titleStructure;
+        public string exportString;
+        public string json;
+        // create an enumerable structure of the long string
+        char[] newArray;
+        List<string> lines = new List<string>();
+        string jsonLinesSB = "";
+        string jsonLinesBL = "";
+        string jsonLinesR = "";
 
         public void ReadFiles()
         {
@@ -36,6 +48,7 @@ namespace RopeTest
 
         public void FillLargeStructures()
         {
+
             // timer variables
             Stopwatch sw = new Stopwatch();
             double builderFill = 0;
@@ -50,13 +63,15 @@ namespace RopeTest
             double ropeMem = 0;
 
             // create an enumerable structure of the long string
-            char[] newArray = stringLong.ToCharArray();
-            List<string> lines = new List<string>();
+            newArray = stringLong.ToCharArray();
+            
 
             // time filling of data structures with initial instance of string
             // ---------------------------------------------------------------
+            // metadata information
+            titleStructure = "StringBuilder";
             // fill stringbuilder
-            for (int i = 0; i < repetitions; i++)
+            for (int i = 1; i < (int)iterations + 1; i++)
             {
                 // get pre-fill memory
                 memStart = GC.GetTotalMemory(false);
@@ -69,14 +84,24 @@ namespace RopeTest
                 builderFill = sw.ElapsedMilliseconds;
                 builderLarge.Clear();
                 //GC.Collect();
-                lines.Add($"Stringbuilder fill: {builderFill} ms");
-                lines.Add($"Stringbuilder elapsed memory: {builderMem}");
+                Export dataExport = new Export(replications, titleStructure, titleMethod, "teststringofmethodology", i, builderFill, builderMem);
+                json = dataExport.CreateJson(dataExport);
+                if (jsonLinesSB == "")
+                {
+                    jsonLinesSB = json;
+                }
+                else
+                {
+                    jsonLinesSB = jsonLinesSB + ", " + json;
+                }
             }
 
-
+            // metadata information
+            titleStructure = "BigList";
             // fill biglist
-            for (int i = 0; i < repetitions; i++)
+            for (int i = 1; i < (int)iterations + 1; i++)
             {
+                
                 // get pre-fill memory
                 memStart = GC.GetTotalMemory(false);
                 // start timer
@@ -86,12 +111,23 @@ namespace RopeTest
                 memEnd = GC.GetTotalMemory(false);
                 biglistMem = memEnd - memStart;
                 biglistFill = sw.ElapsedMilliseconds;
-                lines.Add($"BigList fill: {biglistFill} ms");
-                lines.Add($"BigList elapsed memory: {biglistMem}");
+                // GC.Collect();
+                Export dataExport = new Export(replications, titleStructure, titleMethod, "teststringofmethodology", i, builderFill, builderMem);
+                json = dataExport.CreateJson(dataExport);
+                if (jsonLinesBL == "")
+                {
+                    jsonLinesBL = json;
+                }
+                else
+                {
+                    jsonLinesBL = jsonLinesBL + ", " + json;
+                }
             }
 
+            // metadata information
+            titleStructure = "Rope";
             // fill rope
-            for (int i = 0; i < repetitions; i++)
+            for (int i = 1; i < (int)iterations + 1; i++)
             {
                 memStart = GC.GetTotalMemory(false);
                 sw.Start();
@@ -101,29 +137,44 @@ namespace RopeTest
                 ropeMem = memEnd - memStart;
                 ropeFill = sw.ElapsedMilliseconds;
                 //GC.Collect();
-                lines.Add($"Rope fill: {ropeFill} ms");
-                lines.Add($"Rope elapsed memory: {ropeMem}");
-            }
-            // write results
-            using (StreamWriter writeResults = new StreamWriter(@"c:\repos\files\FillResults.txt"))
-            {
-                foreach (string line in lines)
+                Export dataExport = new Export(replications, titleStructure, titleMethod, "teststringofmethodology", i, builderFill, builderMem);
+                json = dataExport.CreateJson(dataExport);
+                if (jsonLinesR == "")
                 {
-                    writeResults.WriteLine(line);
+                    jsonLinesR = json;
+                }
+                else
+                {
+                    jsonLinesR = jsonLinesR + ", " + json;
                 }
             }
+            // write results
+            jsonLinesR = "[" + jsonLinesR + "]";
+            jsonLinesSB = "[" + jsonLinesSB + "]";
+            jsonLinesBL = "[" + jsonLinesBL + "]";
 
-            // fill  with small string
-            // Stringbuilder only has append, insert, remove and replace
-            StringBuilder builderSmall = new StringBuilder();
-            // BigList doesn't have a concat either
-            BigList<string> biglistSmall = new BigList<string>();
-            // Local rope structure
-            Rope.Rope<string> ropeSmall = new Rope.Rope<string>();
-            // fill strings with initial instance of short string
-            builderSmall.Append(stringShort);
-            biglistSmall.Add(stringShort);
-            ropeSmall.Add(stringShort);
+            // make it available
+            using (StreamWriter writeResults = new StreamWriter(@"c:\repos\files\FillResults.txt"))
+            
+            {
+                writeResults.WriteLine(jsonLinesSB);
+                writeResults.WriteLine(jsonLinesBL);
+                writeResults.WriteLine(jsonLinesR);
+            }
+
+        }
+        // methods to call individual results
+        public string GetJsonSB()
+        {
+            return jsonLinesSB;
+        }
+        public string GetJsonBL()
+        {
+            return jsonLinesBL;
+        }
+        public string GetJsonR()
+        {
+            return jsonLinesR;
         }
     }
 }
