@@ -15,64 +15,72 @@ namespace RopeTest
         int operationIts = 1000;//Replecations
         int collectionIts = 100000; //itirations
 
-        //Create stopwatch. 
+        // Filepaths
+        string warPeacePath = @"C:\Users\v-elmacc\Documents\RopeProject\warandpeace.txt";
+
+        // Create stopwatch. 
         Stopwatch sw = new Stopwatch();
 
-        //Concat Rope.
+        // Method to Concatenate Ropes.
         public void RopeConcatTestCreateRopes()
         {
-            //Set Stopwatch.
+            // Set Stopwatch.
             sw.Start();
 
-            //Read in Strings.
-            //long
-            string warPeace = File.ReadAllText(@"C:\Users\v-elmacc\Documents\RopeProject\warandpeace.txt");//Close file or methods after this won't run!
-            //short
+            // Read in Strings.
+            
+            // Long
+            StreamReader readFile = new StreamReader(warPeacePath);
+            string warPeace = File.ReadAllText(warPeacePath);
+      
+            // Short
             string foxSentence = "The quick brown fox jumps over the lazy dog.";
 
 
-            //Create new char arrays to populate ropes.
+            // Create new char arrays to populate ropes.
             char[] warPeaceArray = warPeace.ToCharArray();
             char[] foxSentenceArray = foxSentence.ToCharArray();
 
-            //Fill Ropes.
+            // Fill Ropes.
             Rope.Rope<char> ropeWarPeace = new Rope.Rope<char>(warPeaceArray, 0, warPeaceArray.Length);
             Rope.Rope<char> ropeFoxSentence = new Rope.Rope<char>(foxSentenceArray, 0, foxSentenceArray.Length);
 
-            //Concatenate Ropes.
+            // Concatenate Ropes.
             Rope.Rope<char> ropeConcat = Rope.Rope<char>.Concat(ropeWarPeace, ropeFoxSentence);
 
             //Time Stop
             sw.Stop();
+           
             //Print time
-            Console.WriteLine("Length of new rope: " + ropeConcat.Length + "characters" + "\n" + "Runtime: " + sw.ElapsedMilliseconds + "ms");
-            Console.ReadLine();
-        }
+            Console.WriteLine("Length of new rope: " + ropeConcat.Length + " characters" + "\n" + "Runtime: " + sw.ElapsedMilliseconds + " ms");
+          }
 
         //Standard String Concat
         public void StringConcatReadStrings()
         {
-            //Set Stopwatch.
+            // Set Stopwatch.
             sw.Start();
 
-            //Read in Strings.
-            //long
-            string warPeace = File.ReadAllText(@"C:\Users\v-elmacc\Documents\RopeProject\warandpeace.txt"); //Close file or methods after this won't run, I think?
-            //short
+            // Read in Strings.
+
+            // Long
+            using (StreamReader readFile = new StreamReader(warPeacePath))
+            {
+                string warPeace = File.ReadAllText(warPeacePath); // Need to access outside the brackets or there is scope issue.
+        
+            // Short
             string foxSentence = "The quick brown fox jumps over the lazy dog.";
 
-            //Concatenate strings
+            // Concatenate strings
+            string stringConcat = warPeace + foxSentence; 
 
-           string stringConcat = warPeace + foxSentence; 
-
-            //Time Stop
+            // Time Stop
             sw.Stop();
-            //Print time
-            Console.WriteLine("Length of new string: " + stringConcat.Length + "characters" + "\n" + "Runtime: " + sw.ElapsedMilliseconds + "ms");
-            Console.ReadLine();
 
+            // Print time
+            Console.WriteLine("Length of new string: " + stringConcat.Length + " characters" + "\n" + "Runtime: " + sw.ElapsedMilliseconds + " ms");
+            }
         }
-
 
         //Concat with StringBuilder.
         public void StringBuilderConcatReadstrings()
@@ -80,24 +88,26 @@ namespace RopeTest
             //Set Stopwatch.
             sw.Start();
 
-           //Read in Strings.
-           //long
-           string warPeace = File.ReadAllText(@"C:\Users\v-elmacc\Documents\RopeProject\warandpeace.txt");//Close file or methods after this won't run!
-           //short
-           string foxSentence = "The quick brown fox jumps over the lazy dog.";
+                //Read in Strings.
 
-           // Create new stringbuilder.
-           StringBuilder combinedSB = new StringBuilder(warPeace);
-            Console.WriteLine("First length: " + combinedSB.Length);
-            //uses .Append to concat//
-            combinedSB.Append(foxSentence);
+                // Long
+                string warPeace = File.ReadAllText(warPeacePath);
 
-            //Time Stop
-            sw.Stop();
+                // Short
+                string foxSentence = "The quick brown fox jumps over the lazy dog.";
 
-            //Print time
-            Console.WriteLine("Length of new stringbuilder: " + combinedSB.Length + " characters" + "\n" + "Runtime: " + sw.ElapsedMilliseconds + " ms");
-            Console.ReadLine();
+                // Create new stringbuilder.
+                StringBuilder combinedSB = new StringBuilder(warPeace);
+
+                // "concatenate" strings using .Append method.
+                combinedSB.Append(foxSentence);
+
+                //Time Stop
+                sw.Stop();
+
+                //Print time
+                Console.WriteLine("Length of new stringbuilder: " + combinedSB.Length + " characters" + "\n" + "Runtime: " + sw.ElapsedMilliseconds + " ms");
+      
         }
 
         //Concat with Biglist
@@ -105,32 +115,30 @@ namespace RopeTest
         {
             // Start stopwatch.
             sw.Start();
+            using (StreamReader readShortFile = new StreamReader(warPeacePath))
+            {
+                // Read in strings.
+                
+                // Long
+                string warPeace = File.ReadAllText(warPeacePath);
+                
+                // Short
+                string foxSentence = "The quick brown fox jumps over the lazy dog.";
 
-            // Read in strings.
-            string warPeace = File.ReadAllText(@"C:\Users\v-elmacc\Documents\RopeProject\warandpeace.txt"); //Close file or methods after this won't run, I think?
-            //short
-            string foxSentence = "The quick brown fox jumps over the lazy dog.";
+                // Create new BigList
+                BigList<char> combinedBL = new BigList<char>(warPeace);
 
-            /* // Seems to come out the exact same with CharArray or the string. so just read string.
-            char[] warPeaceArray = warPeace.ToCharArray();
-            char[] foxSentenceArray = foxSentence.ToCharArray();
-            */
-            // Create new BigList
-            BigList<char> combinedBL = new BigList<char>(warPeace);
-            //As string or char array, each char is comma sep, so used string.
+                //Convert foxSentence to charArran and .Add foxlist to BigList for concat.
+                combinedBL.AddRange(foxSentence);
 
-            //Convert foxSentence to charArran and .Add foxlist to BigList for concat.
-            combinedBL.AddRange(foxSentence);
+                //Time Stop
+                sw.Stop();
 
-            //Time Stop
-            sw.Stop();
-            Console.WriteLine("Length of new BigList: " + combinedBL.Count + " characters" + "\n" + "Runtime: " + sw.ElapsedMilliseconds + " ms");
-
+                Console.WriteLine("Length of new BigList: " + combinedBL.Count + " characters" + "\n" + "Runtime: " + sw.ElapsedMilliseconds + " ms");
+            }
+            // Read Results.
             Console.ReadLine();
-            
-            
-           
         }
-        
+          
     }
 }
