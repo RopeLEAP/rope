@@ -7,7 +7,7 @@ using Wintellect.PowerCollections;
 
 namespace RopeTest
 {
-    class InsertService
+    public class InsertService
     {
         // This class calls FillService and runs those times tests; then takes the last iteration of the fill service data structures and repeatedly inserts another copy of War and Peace into the structure at the given position a given number of times (iterations)
         Stopwatch sw = new Stopwatch();
