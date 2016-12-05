@@ -39,8 +39,8 @@ namespace RopeTest
 
             // ----------------------------- this section contains function calls to the concat test class (liz) ---------------------- //
 
-            ConcatTest firstConcatTest = new ConcatTest();
-            firstConcatTest.RopeConcatTestCreateRopes();
+            ConcatTest firstConcatTest = new ConcatTest(5,2);
+            firstConcatTest.RopeConcatTestCreateRopes(); // Is this really running more than one concat?
             firstConcatTest.StringConcatReadStrings();
             firstConcatTest.StringBuilderConcatReadstrings();
             firstConcatTest.BigListConcatReadStrings();
