@@ -7,6 +7,7 @@ namespace RopeTest
     {
         static void Main(string[] args)
         {
+           /*
             // ----------------------------- this section contains function calls to the fill and insert test classes (sid) ----------------------- //
             FillTest fillTest = new FillTest();
             fillTest.ReadFiles();
@@ -23,12 +24,13 @@ namespace RopeTest
             //Console.WriteLine("Done! File is InsertResults.txt in the repos/repo directory.");
             
             Console.ReadLine();
-
+            */
             // ----------------------------- this section contains function calls to the concat test class (liz) ---------------------- //
 
-            //ConcatTest firstConcatTest = new ConcatTest();
+            ConcatTest firstConcatTest = new ConcatTest();
             //firstConcatTest.RopeConcatTestCreateRopes();
             //firstConcatTest.StringBuilderConcatReadstrings();
+            firstConcatTest.BigListConcatReadStrings();
 
             // ----------------------------- this section contains function calls to the append test class (kwame) -------------------- //
 

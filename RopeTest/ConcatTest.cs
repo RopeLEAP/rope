@@ -103,9 +103,35 @@ namespace RopeTest
 
 
         //Concat with Biglist
-        public void biglistConcatReadstrings()
+        public void BigListConcatReadStrings()
         {
-            BigList<char> combinedBL = new BigList<char>()
+            // Start stopwatch.
+            sw.Start();
+
+            // Read in strings.
+            string warPeace = File.ReadAllText(@"C:\Users\v-elmacc\Documents\RopeProject\warandpeace.txt"); //Close file or methods after this won't run, I think?
+            //short
+            string foxSentence = "The quick brown fox jumps over the lazy dog.";
+
+            /* // Seems to come out the exact same with CharArray or the string. so just read string.
+            char[] warPeaceArray = warPeace.ToCharArray();
+            char[] foxSentenceArray = foxSentence.ToCharArray();
+            */
+            // Create new BigList
+            BigList<char> combinedBL = new BigList<char>(warPeace);
+            //As string or char array, each char is comma sep, so used string.
+
+            //Convert foxSentence to charArran and .Add foxlist to BigList for concat.
+            combinedBL.AddRange(foxSentence);
+
+            //Time Stop
+            sw.Stop();
+            Console.WriteLine("Length of new BigList: " + combinedBL.Count + " characters" + "\n" + "Runtime: " + sw.ElapsedMilliseconds + " ms");
+
+            Console.ReadLine();
+            
+            
+           
         }
         
     }
