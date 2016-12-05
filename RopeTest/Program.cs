@@ -8,11 +8,14 @@ namespace RopeTest
         static void Main(string[] args)
         {
             // ----------------------------- this section contains function calls to the fill and insert service classes (sid) ----------------------- //
+            
+            /*
             // strings to hold json results
             string resultStringBuilder;
             string resultBigList;
             string resultRope;
 
+           
             // FillService fills the data structures with the given number of strings of war and peace - this can run standalone and return resulting filled structures - InsertService will also run these
             //FillService fillService = new FillService();
             //fillService.ReadFiles();
@@ -32,14 +35,16 @@ namespace RopeTest
 
             Console.WriteLine("Done!");
             Console.ReadLine();
+            */
 
             // ----------------------------- this section contains function calls to the concat test class (liz) ---------------------- //
 
             ConcatTest firstConcatTest = new ConcatTest();
-            //firstConcatTest.RopeConcatTestCreateRopes();
-            //firstConcatTest.StringBuilderConcatReadstrings();
+            firstConcatTest.RopeConcatTestCreateRopes();
+            firstConcatTest.StringConcatReadStrings();
+            firstConcatTest.StringBuilderConcatReadstrings();
             firstConcatTest.BigListConcatReadStrings();
-
+            //Console.ReadLine();
             // ----------------------------- this section contains function calls to the append test class (kwame) -------------------- //
 
         }
