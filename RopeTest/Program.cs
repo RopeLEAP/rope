@@ -33,12 +33,12 @@ namespace RopeTest
             Console.WriteLine("Done!");
             Console.ReadLine();
 
-
             // ----------------------------- this section contains function calls to the concat test class (liz) ---------------------- //
 
-            //ConcatTest firstConcatTest = new ConcatTest();
+            ConcatTest firstConcatTest = new ConcatTest();
             //firstConcatTest.RopeConcatTestCreateRopes();
             //firstConcatTest.StringBuilderConcatReadstrings();
+            firstConcatTest.BigListConcatReadStrings();
 
             // ----------------------------- this section contains function calls to the append test class (kwame) -------------------- //
 

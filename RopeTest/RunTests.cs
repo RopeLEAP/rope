@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace RopeTest
 {
-    class RunTests
+    public abstract class RunTests
     {
+        public abstract Structure { get; set; }
+
     }
 }

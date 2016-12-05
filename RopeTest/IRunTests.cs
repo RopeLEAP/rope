@@ -6,7 +6,9 @@ using System.Threading.Tasks;
 
 namespace RopeTest
 {
-    interface IRunTests
+    public interface IRunTests
     {
+        void RunTest();
+        
     }
 }
