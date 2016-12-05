@@ -53,11 +53,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConcatTest.cs" />
-    <Compile Include="Export.cs" />
+    <Compile Include="Data.cs" />
+    <Compile Include="IRunTests.cs" />
+    <Compile Include="RunTests.cs" />
+    <Compile Include="Test.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="FillTest.cs" />
-    <Compile Include="InsertTest.cs" />
+    <Compile Include="FillService.cs" />
+    <Compile Include="InsertService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -8,25 +7,23 @@ using Wintellect.PowerCollections;
 
 namespace RopeTest
 {
-    public class FillTest
+    class InsertService
     {
-        // variables to set iterations and track times
-        public int replications = 1;
-        public double iterations = 10;
+        // This class calls FillService and runs those times tests; then takes the last iteration of the fill service data structures and repeatedly inserts another copy of War and Peace into the structure at the given position a given number of times (iterations)
         Stopwatch sw = new Stopwatch();
-        // variables to hold file contetns
+        // variables to hold file contents
         string stringShort;
         string stringLong;
         // path and reader for file I/O
         string shortFilePath = @"c:\repos\files\foxText.txt";
         string longFilePath = @"c:\repos\files\warandpeace.txt";
         // metadata information
-        public string titleMethod = "Initial Fill";
+        public string titleMethod = "Insert War and Peace at beginning of data structures the given number of times - structures which have been instantiated with a single copy of War and Peace.";
         public string titleStructure;
-        public string exportString;
+        //public string exportString;
         public string json;
         // create an enumerable structure of the long string
-        char[] newArray;
+        public char[] newArray;
         List<string> lines = new List<string>();
         string jsonLinesSB = "";
         string jsonLinesBL = "";
@@ -37,7 +34,7 @@ namespace RopeTest
             using (StreamReader readShortFile = new StreamReader(shortFilePath))
             {
                 // read in small string file; create data structures to be tested
-               stringShort = File.ReadAllText(shortFilePath);
+                stringShort = File.ReadAllText(shortFilePath);
             }
             using (StreamReader readLongFile = new StreamReader(longFilePath))
             {
@@ -46,9 +43,8 @@ namespace RopeTest
             }
         }
 
-        public void FillLargeStructures()
+        public void PrependToLargeStructures(int replications, int iterations)
         {
-
             // timer variables
             Stopwatch sw = new Stopwatch();
             double builderFill = 0;
@@ -62,29 +58,36 @@ namespace RopeTest
             double biglistMem = 0;
             double ropeMem = 0;
 
-            // create an enumerable structure of the long string
+            // create an enumerable structure of the long string as feed for rope
             newArray = stringLong.ToCharArray();
-            
 
-            // time filling of data structures with initial instance of string
+            // Call the fill service to create large structures
+            FillService insertFillService = new FillService();
+            insertFillService.ReadFiles();
+            insertFillService.FillLargeStructures(iterations);
+
+            StringBuilder builderLarge = insertFillService.builderLarge;
+            BigList<char> biglistLarge = insertFillService.biglistLarge;
+            Rope.Rope<char> ropeLarge = insertFillService.ropeLarge;
+
+            // time insertion of string into structures with a single copy of war and peace
             // ---------------------------------------------------------------
             // metadata information
             titleStructure = "StringBuilder";
             // fill stringbuilder
-            for (int i = 1; i < (int)iterations + 1; i++)
+            for (int i = 0; i < replications; i++)
             {
                 // get pre-fill memory
                 memStart = GC.GetTotalMemory(false);
                 // start timer
                 sw.Start();
-                StringBuilder builderLarge = new StringBuilder(stringLong);
+                builderLarge.Insert(0, stringLong);
                 sw.Stop();
                 memEnd = GC.GetTotalMemory(false);
                 builderMem = memEnd - memStart;
                 builderFill = sw.ElapsedMilliseconds;
-                builderLarge.Clear();
-                //GC.Collect();
-                Export dataExport = new Export(replications, titleStructure, titleMethod, "teststringofmethodology", i, builderFill, builderMem);
+                // Manual json build
+                Test dataExport = new Test(replications, titleStructure, titleMethod, "teststringofmethodology", i, builderFill, builderMem);
                 json = dataExport.CreateJson(dataExport);
                 if (jsonLinesSB == "")
                 {
@@ -99,20 +102,22 @@ namespace RopeTest
             // metadata information
             titleStructure = "BigList";
             // fill biglist
-            for (int i = 1; i < (int)iterations + 1; i++)
+            for (int i = 0; i < replications; i++)
             {
-                
                 // get pre-fill memory
                 memStart = GC.GetTotalMemory(false);
                 // start timer
                 sw.Start();
-                BigList<char> biglistLarge = new BigList<char>(newArray);
+                foreach(char letter in newArray)
+                {
+                    biglistLarge.Insert(0, letter);
+                }               
                 sw.Stop();
                 memEnd = GC.GetTotalMemory(false);
                 biglistMem = memEnd - memStart;
                 biglistFill = sw.ElapsedMilliseconds;
-                // GC.Collect();
-                Export dataExport = new Export(replications, titleStructure, titleMethod, "teststringofmethodology", i, builderFill, builderMem);
+                // Manual json build
+                Test dataExport = new Test(replications, titleStructure, titleMethod, "teststringofmethodology", i, builderFill, builderMem);
                 json = dataExport.CreateJson(dataExport);
                 if (jsonLinesBL == "")
                 {
@@ -126,18 +131,18 @@ namespace RopeTest
 
             // metadata information
             titleStructure = "Rope";
-            // fill rope
-            for (int i = 1; i < (int)iterations + 1; i++)
+            // insert into rope
+            for (int i = 0; i < replications; i++)
             {
                 memStart = GC.GetTotalMemory(false);
                 sw.Start();
-                Rope.Rope<char> ropeLarge = new Rope.Rope<char>(newArray, 0, newArray.Length);
+                ropeLarge.AddRange(newArray, 0, newArray.Length);
                 sw.Stop();
                 memEnd = GC.GetTotalMemory(false);
                 ropeMem = memEnd - memStart;
                 ropeFill = sw.ElapsedMilliseconds;
-                //GC.Collect();
-                Export dataExport = new Export(replications, titleStructure, titleMethod, "teststringofmethodology", i, builderFill, builderMem);
+                //Manual json build
+                Test dataExport = new Test(replications, titleStructure, titleMethod, "teststringofmethodology", i, builderFill, builderMem);
                 json = dataExport.CreateJson(dataExport);
                 if (jsonLinesR == "")
                 {
@@ -148,20 +153,24 @@ namespace RopeTest
                     jsonLinesR = jsonLinesR + ", " + json;
                 }
             }
-            // write results
+            // append brackets
             jsonLinesR = "[" + jsonLinesR + "]";
             jsonLinesSB = "[" + jsonLinesSB + "]";
             jsonLinesBL = "[" + jsonLinesBL + "]";
 
-            // make it available
-            using (StreamWriter writeResults = new StreamWriter(@"c:\repos\files\FillResults.txt"))
-            
+            // write to files
+            using (StreamWriter writeResults = new StreamWriter(@"c:\repos\files\InsertResultsSB.txt"))
             {
                 writeResults.WriteLine(jsonLinesSB);
+            }
+            using (StreamWriter writeResults = new StreamWriter(@"c:\repos\files\InsertResultsBL.txt"))
+            {
                 writeResults.WriteLine(jsonLinesBL);
+            }
+            using (StreamWriter writeResults = new StreamWriter(@"c:\repos\files\InsertResultsR.txt"))
+            {
                 writeResults.WriteLine(jsonLinesR);
             }
-
         }
         // methods to call individual results
         public string GetJsonSB()
