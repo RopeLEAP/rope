@@ -52,6 +52,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AMethods.cs" />
     <Compile Include="ConcatTest.cs" />
     <Compile Include="Data.cs" />
     <Compile Include="IRunTests.cs" />
