@@ -89,49 +89,49 @@ namespace RopeWebApp2.Services
             return newTestModel;
         }
 
-        //public TestModel BLFillTest(int newIterations)
-        //{
-        //    // A test that fills the data structure with the text of war and peace N (newIterations) times, clearing the structure between each fill
-        //    // --------------- Second data structure: BigList
-        //    // metadata information
-        //    newTestModel.title = "BigList";
-        //    newTestModel.method = ($"Fill empty data structures with a copy of War and Peace; repeat {newIterations} times");
+        public TestModel BLFillTest(int newIterations)
+        {
+            // A test that fills the data structure with the text of war and peace N (newIterations) times, clearing the structure between each fill
+            // --------------- Second data structure: BigList
+            // metadata information
+            newTestModel.title = "BigList";
+            newTestModel.method = ($"Fill empty data structures with a copy of War and Peace; repeat {newIterations} times");
 
-        //    // timer variables
-        //    Stopwatch sw = new Stopwatch();
+            // timer variables
+            Stopwatch sw = new Stopwatch();
 
-        //    // memory variables
-        //    double memStart = 0;
-        //    double memEnd = 0;
+            // memory variables
+            double memStart = 0;
+            double memEnd = 0;
 
-        //    // create an enumerable structure of the long string
-        //    newArray = stringLong.ToCharArray();
+            // create an enumerable structure of the long string
+            newArray = stringLong.ToCharArray();
 
-        //    // time filling of data structures with a single instance of string
-        //    // ---------------------------------------------------------------
-        //    for (int i = 1; i < newIterations + 1; i++)
-        //    {
-        //        TestDataModel newTestData = new TestDataModel();
+            // time filling of data structures with a single instance of string
+            // ---------------------------------------------------------------
+            for (int i = 1; i < newIterations + 1; i++)
+            {
+                TestDataModel newTestData = new TestDataModel();
 
-        //        // get pre-fill memory
-        //        memStart = GC.GetTotalMemory(false);
-        //        // start timer
-        //        sw.Start();
-        //        biglistLarge = new BigList<char>(newArray);
-        //        sw.Stop();
+                // get pre-fill memory
+                memStart = GC.GetTotalMemory(false);
+                // start timer
+                sw.Start();
+                biglistLarge = new BigList<char>(newArray);
+                sw.Stop();
 
-        //        memEnd = GC.GetTotalMemory(false);
-        //        newTestData.memory = memEnd - memStart;
-        //        newTestData.time = sw.ElapsedMilliseconds;
-        //        averageSB += averageSB;
+                memEnd = GC.GetTotalMemory(false);
+                newTestData.memory = memEnd - memStart;
+                newTestData.time = sw.ElapsedMilliseconds;
+                averageSB += averageSB;
 
-        //        newTestData.id = i;
-        //        newTestDataModel.Add(newTestData);
-        //        sw.Reset();
-        //    }
-        //    newTestModel.data = newTestDataModel;
-        //    return newTestModel;
-        //}
+                newTestData.id = i;
+                newTestDataModel.Add(newTestData);
+                sw.Reset();
+            }
+            newTestModel.data = newTestDataModel;
+            return newTestModel;
+        }
 
         // David - do we need this?
         public TestModel SBInsert()

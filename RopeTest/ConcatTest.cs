@@ -21,11 +21,7 @@ namespace RopeTest
         }
 
         // Filepaths
-<<<<<<< HEAD
-=======
-        string warPeacePath = @"C:\Users\v-elmacc\Documents\RopeProject\warandpeace.txt";
         StreamReader readFile = new StreamReader(@"C:\Users\v-elmacc\Documents\RopeProject\warandpeace.txt");
->>>>>>> 4ecd49ad49beb55b3d3f2a23e69ee660ad743658
         string warPeace = File.ReadAllText(@"C:\Users\v-elmacc\Documents\RopeProject\warandpeace.txt");
         string foxSentence = "The quick brown fox jumps over the lazy dog.";
         
