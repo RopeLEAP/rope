@@ -12,7 +12,7 @@ namespace RopeWebApp2.Services
 {
     public class TestService
     {
-        // This repeatedly (* iterations) fills a data structure with a copy of war and peace, and tracks in milliseconds how long it takes for each fill to occur; the structures are recreated at each iteration
+        // This repeatedly (* iterations) fills a data structure with a copy of war and peace, and tracks in milliseconds how long it takes for each fill to occur; the structures are recreated at each iteration. Memory allocation readings are taken before and after each iteration.
         // variables to set iterations and track times
         public int replications;
         public int iterations;
@@ -38,9 +38,12 @@ namespace RopeWebApp2.Services
         // Make the filled structures available to other tests
         public StringBuilder builderLarge;
         public BigList<char> biglistLarge;
+        public Rope.Rope<char> ropeLarge;
 
         // Get an average time for the fills
-        public double averageSB;
+        public long averageTime;
+        // Get total memory for the fills
+        public long averageMemory;
 
         List<TestDataModel> newTestDataModel = new List<TestDataModel>();
         TestModel newTestModel = new TestModel();
@@ -57,11 +60,8 @@ namespace RopeWebApp2.Services
             Stopwatch sw = new Stopwatch();
 
             // memory variables
-            double memStart = 0;
-            double memEnd = 0;
-
-            // create an enumerable structure of the long string, required for the Rope constructor
-            //newArray = stringLong.ToCharArray();
+            long memStart = 0;
+            long memEnd = 0;
 
             // time filling of data structures with a single instance of string
             // ---------------------------------------------------------------
@@ -70,7 +70,7 @@ namespace RopeWebApp2.Services
                 TestDataModel newTestData = new TestDataModel();
 
                 // get pre-fill memory
-                memStart = GC.GetTotalMemory(false);
+                memStart = GC.GetTotalMemory(true);
                 // start timer
                 sw.Start();
                 builderLarge = new StringBuilder(stringLong);
@@ -78,17 +78,22 @@ namespace RopeWebApp2.Services
 
                 memEnd = GC.GetTotalMemory(false);
                 newTestData.memory = memEnd - memStart;
-                newTestData.time = sw.ElapsedMilliseconds;
-                averageSB += averageSB;
+                newTestData.time = sw.ElapsedTicks;
+                TimeSpan ts = sw.Elapsed;
+                //newTestData.time = ts.Milliseconds;
+                averageMemory += averageMemory;
+                
                 
                 newTestData.id = i;
                 newTestDataModel.Add(newTestData);
                 sw.Reset();
             }
+            newTestModel.averageTime = averageTime/newIterations;
+            newTestModel.averageMemory = averageMemory/newIterations;
             newTestModel.data = newTestDataModel;
             return newTestModel;
         }
-
+        
         public TestModel BLFillTest(int newIterations)
         {
             // A test that fills the data structure with the text of war and peace N (newIterations) times, clearing the structure between each fill
@@ -101,10 +106,10 @@ namespace RopeWebApp2.Services
             Stopwatch sw = new Stopwatch();
 
             // memory variables
-            double memStart = 0;
-            double memEnd = 0;
+            long memStart = 0;
+            long memEnd = 0;
 
-            // create an enumerable structure of the long string
+            // create an enumerable structure of the long string, required for the Rope  and BigList constructor
             newArray = stringLong.ToCharArray();
 
             // time filling of data structures with a single instance of string
@@ -114,7 +119,7 @@ namespace RopeWebApp2.Services
                 TestDataModel newTestData = new TestDataModel();
 
                 // get pre-fill memory
-                memStart = GC.GetTotalMemory(false);
+                memStart = GC.GetTotalMemory(true);
                 // start timer
                 sw.Start();
                 biglistLarge = new BigList<char>(newArray);
@@ -122,17 +127,66 @@ namespace RopeWebApp2.Services
 
                 memEnd = GC.GetTotalMemory(false);
                 newTestData.memory = memEnd - memStart;
-                newTestData.time = sw.ElapsedMilliseconds;
-                averageSB += averageSB;
+                newTestData.time = sw.ElapsedTicks;
+                averageTime += averageTime;
+                averageMemory += averageMemory;
 
                 newTestData.id = i;
                 newTestDataModel.Add(newTestData);
                 sw.Reset();
             }
+            newTestModel.averageTime = averageTime / newIterations;
+            newTestModel.averageMemory = averageMemory / newIterations;
             newTestModel.data = newTestDataModel;
             return newTestModel;
         }
 
+        public TestModel RopeFillTest(int newIterations)
+        {
+            // A test that fills the data structure with the text of war and peace N (newIterations) times, clearing the structure between each fill
+            // --------------- Third data structure: Rope
+            // metadata information
+            newTestModel.title = "Rope";
+            newTestModel.method = ($"Fill empty data structures with a copy of War and Peace; repeat {newIterations} times");
+
+            // timer variables
+            Stopwatch sw = new Stopwatch();
+
+            // memory variables
+            long memStart = 0;
+            long memEnd = 0;
+
+            // create an enumerable structure of the long string, required for the Rope  and BigList constructor
+            newArray = stringLong.ToCharArray();
+
+            // time filling of data structures with a single instance of string
+            // ---------------------------------------------------------------
+            for (int i = 1; i < newIterations + 1; i++)
+            {
+                TestDataModel newTestData = new TestDataModel();
+
+                // get pre-fill memory
+                memStart = GC.GetTotalMemory(true);
+                // start timer
+                sw.Start();
+                ropeLarge = new Rope.Rope<char>(newArray, 0, newArray.Length);
+                sw.Stop();
+
+                memEnd = GC.GetTotalMemory(false);
+                newTestData.memory = memEnd - memStart;
+                newTestData.time = sw.ElapsedTicks;
+                averageTime += averageTime;
+                averageMemory += averageMemory;
+
+                newTestData.id = i;
+                newTestDataModel.Add(newTestData);
+                sw.Reset();
+            }
+            newTestModel.averageTime = averageTime / newIterations;
+            newTestModel.averageMemory = averageMemory / newIterations;
+            newTestModel.data = newTestDataModel;
+            return newTestModel;
+        }
         // David - do we need this?
         public TestModel SBInsert()
         {

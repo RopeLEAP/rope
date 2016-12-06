@@ -9,6 +9,6 @@ namespace RopeWebApp2.Models
     {
         public int id { get; set; }
         public long time { get; set; }
-        public double memory { get; set; }
+        public long memory { get; set; }
     }
 }
