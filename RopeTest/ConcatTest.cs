@@ -38,7 +38,7 @@ namespace RopeTest
         // Method to Concatenate Ropes.
         public void RopeConcatTestCreateRopes()
         {
-            //Lists to calculate averages.
+            //Lists to calculate averages. See if you can declare these once and reset?
             List<int> lengths = new List<int>();
             List<double> memallocs = new List<double>();
             List<double> runtimes = new List<double>();
@@ -77,8 +77,8 @@ namespace RopeTest
                     */
 
                     //these should be faster than converting to charArray, and then you can just read the file in the very beginning and not count that in the time & memory!
-                    Rope.Rope<string> ropeWarPeace = new Rope.Rope<string>(warPeace.Split(" ".ToCharArray()), 0 , warPeace.Length); //splits on word, can split on sentence too.
-                    Rope.Rope<string> ropeFoxSentence = new Rope.Rope<string>(foxSentence.Split(" ".ToCharArray()), 0, foxSentence.Length);
+                    Rope.Rope<string> ropeWarPeace = new Rope.Rope<string>(warPeace.Split(" ".ToCharArray())); //splits on word, can split on sentence too.
+                    Rope.Rope<string> ropeFoxSentence = new Rope.Rope<string>(foxSentence.Split(" ".ToCharArray()));
 
                     // Concatenate Ropes.
                     //Rope.Rope<char> ropeConcat = Rope.Rope<char>.Concat(ropeWarPeace, ropeFoxSentence);
@@ -147,10 +147,10 @@ namespace RopeTest
                     // Read in Strings.
 
                     // Long
-                    string warPeace = File.ReadAllText(warPeacePath);
+                   //string warPeace = File.ReadAllText(warPeacePath);
 
                     // Short
-                    string foxSentence = "The quick brown fox jumps over the lazy dog.";
+                    //string foxSentence = "The quick brown fox jumps over the lazy dog.";
 
                     // Concatenate strings
                     string stringConcat = warPeace + foxSentence;
@@ -215,10 +215,10 @@ namespace RopeTest
                     //Read in Strings.
 
                     // Long
-                    string warPeace = File.ReadAllText(warPeacePath);
+                    //string warPeace = File.ReadAllText(warPeacePath);
 
                     // Short
-                    string foxSentence = "The quick brown fox jumps over the lazy dog.";
+                    //string foxSentence = "The quick brown fox jumps over the lazy dog.";
 
                     // Create new stringbuilder.
                     StringBuilder combinedSB = new StringBuilder(warPeace);
@@ -284,10 +284,10 @@ namespace RopeTest
                     // Read in strings.
 
                     // Long
-                    string warPeace = File.ReadAllText(warPeacePath);
+                    //string warPeace = File.ReadAllText(warPeacePath);
 
                     // Short
-                    string foxSentence = "The quick brown fox jumps over the lazy dog.";
+                    //string foxSentence = "The quick brown fox jumps over the lazy dog.";
 
                     // Create new BigList
                     BigList<char> combinedBL = new BigList<char>(warPeace);
