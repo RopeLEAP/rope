@@ -1,29 +1,35 @@
 ﻿@{
     ViewBag.Title = "About";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<h2>Rope Testing</h2>
+@*<h3>@ViewBag.Message</h3>*@
 
-<p>Use this area to provide additional information.</p>
+
+<div ng-controller="Main as main">
+
+    <button ng-click="main.getStringBuilder()">String Builder Test</button>
+    <h3>{{main.stringBuilderData.method}}</h3>
+        <table class="table table-striped" ng-show="main.stringBuilderData">
+            <thead>
+                <tr>
+                    <th>Iteration</th>
+                    <th>Memory</th>
+                    <th>Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="test in main.stringBuilderData.data">
+                    <td>{{test.id}}</td>
+                    <td>{{test.memory}}</td>
+                    <td>{{test.time}}</td>
+                </tr>
+            </tbody>
+        </table>
+   
+</div>
+
 
 @Scripts.Render("~/bundles/jquery")
 
-<script type="text/javascript">
-
-    $(document).ready(function () {
-        //alert("hello world");
-
-        $.ajax({
-            url: "/api/RopeApi",
-            method: "GET",
-            success: function (result) {
-                alert("success");
-            }
-        });
-
-
-
-
-    });
-
-</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+<script src="/Content/app/app.js"></script>
