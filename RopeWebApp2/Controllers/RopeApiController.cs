@@ -19,6 +19,7 @@ namespace RopeWebApp2.Controllers
             //insertService.ReadFiles();
             //insertService.PrependToLargeStructures(50, 1);
             TestService testService = new Services.TestService();
+            testService.ReadFiles();
             resultRope = testService.FillLargeStructures(5);
             return Request.CreateResponse(HttpStatusCode.OK, testService);
         }

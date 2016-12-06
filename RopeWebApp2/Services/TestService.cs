@@ -23,8 +23,6 @@ namespace RopeWebApp2.Services
         // set metadata information
         public string titleMethod = "Fill empty data structures a copy of War and Peace; repeat n (iterations) number of times";
         public string titleStructure;
-        //public string exportString;
-        public string json;
         // create an enumerable structure of the long string
         public char[] newArray;
         public List<string> lines = new List<string>();
