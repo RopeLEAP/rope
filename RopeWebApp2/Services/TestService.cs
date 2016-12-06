@@ -168,15 +168,15 @@ namespace RopeWebApp2.Services
             return newTestModel;
         }
 
-        public TestModel BLInsertTest(int newIterations)
+        public TestModel BLPrependTest(int newIterations)
         {
             // A test that fills the data structure with the text of war and peace N (newIterations) times, clearing the structure between each fill
             // --------------- Second data structure: BigList
             // metadata information
             newTestModel.title = "BigList";
-            newTestModel.method = ($"Fill empty data structures with a copy of War and Peace; repeat {newIterations} times");
+            newTestModel.method = ($"Insert copy of War and Peace at start of structure; repeat {newIterations} times");
 
-            // create an enumerable structure of the long string, required for the Rope  and BigList constructor
+            // create an enumerable structure of the long string, required for the Rope and BigList constructor
             newArray = stringLong.ToCharArray();
 
             // time filling of data structures with a single instance of string

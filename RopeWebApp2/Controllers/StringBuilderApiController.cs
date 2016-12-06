@@ -20,12 +20,12 @@ namespace RopeWebApp2.Controllers
             resultSB = testService.SBFillTest(100);
             return Request.CreateResponse(HttpStatusCode.OK, resultSB);
         }
-        //public HttpResponseMessage GetStringBuilderInsertTestResults(int iterations)
+        //public HttpResponseMessage GetStringBuilderPrependTestResults(int iterations)
         //{
         //    TestModel resultSB = new TestModel();
         //    TestService testService = new Services.TestService();
         //    testService.ReadFiles();
-        //    resultSB = testService.SBInsertTest(100);
+        //    resultSB = testService.SBPrependTest(100);
         //    return Request.CreateResponse(HttpStatusCode.OK, resultSB);
         //}
     }
