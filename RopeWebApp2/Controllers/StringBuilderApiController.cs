@@ -9,7 +9,7 @@ namespace RopeWebApp2.Controllers
     public class StringBuilderApiController : ApiController
     {
         // Run and return stringbuilder tests
-        public HttpResponseMessage GetStringBuilderFillTestResults(int iterations)
+        public HttpResponseMessage GetStringBuilderFillTestResults()
         {
             TestModel resultSB = new TestModel();
             TestService testService = new Services.TestService();

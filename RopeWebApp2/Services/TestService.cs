@@ -47,12 +47,8 @@ namespace RopeWebApp2.Services
         // Fill tests
         public TestModel FillTest(int newIterations, string structureName)
         {
-            long memStart = 0, memEnd = 0;
-
             for (int i = 1; i < newIterations + 1; i++)
             {
-                TestDataModel newTestData = new TestDataModel();
-
                 // get pre-fill memory
                 memStart = GC.GetTotalMemory(true);
 
@@ -82,12 +78,13 @@ namespace RopeWebApp2.Services
                 }
 
                 memEnd = GC.GetTotalMemory(false);
-                newTestData.memory = memEnd - memStart;
-                newTestData.time = sw.ElapsedTicks;
+
+                TestDataModel newTestData = new TestDataModel { id = i, memory = (memEnd - memStart), time = sw.ElapsedTicks  };
+
+                // Gets sum of time and memory
                 averageTime += newTestData.time;
                 averageMemory += newTestData.memory;
 
-                newTestData.id = i;
                 newTestDataModel.Add(newTestData);
                 sw.Reset();
 
@@ -105,8 +102,6 @@ namespace RopeWebApp2.Services
 
             for (int i = 1; i < newIterations + 1; i++)
             {
-                TestDataModel newTestData = new TestDataModel();
-
                 // get pre-fill memory
                 memStart = GC.GetTotalMemory(true);
 
@@ -137,13 +132,15 @@ namespace RopeWebApp2.Services
                         sw.Stop();
                         break;
                 }
+
                 memEnd = GC.GetTotalMemory(false);
-                newTestData.memory = memEnd - memStart;
-                newTestData.time = sw.ElapsedTicks;
+
+                TestDataModel newTestData = new TestDataModel { id = i, memory = (memEnd - memStart), time = sw.ElapsedTicks };
+
+                // Gets sum of time and memory
                 averageTime += newTestData.time;
                 averageMemory += newTestData.memory;
 
-                newTestData.id = i;
                 newTestDataModel.Add(newTestData);
                 sw.Reset();
 
@@ -161,8 +158,6 @@ namespace RopeWebApp2.Services
 
             for (int i = 1; i < newIterations + 1; i++)
             {
-                TestDataModel newTestData = new TestDataModel();
-
                 // get pre-fill memory
                 memStart = GC.GetTotalMemory(true);
 
@@ -193,13 +188,15 @@ namespace RopeWebApp2.Services
                         sw.Stop();
                         break;
                 }
+
                 memEnd = GC.GetTotalMemory(false);
-                newTestData.memory = memEnd - memStart;
-                newTestData.time = sw.ElapsedTicks;
+
+                TestDataModel newTestData = new TestDataModel { id = i, memory = (memEnd - memStart), time = sw.ElapsedTicks };
+
+                // Gets sum of time and memory
                 averageTime += newTestData.time;
                 averageMemory += newTestData.memory;
 
-                newTestData.id = i;
                 newTestDataModel.Add(newTestData);
                 sw.Reset();
 
