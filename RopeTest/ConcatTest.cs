@@ -21,11 +21,6 @@ namespace RopeTest
         }
 
         // Filepaths
-<<<<<<< HEAD
-=======
-        string warPeacePath = @"C:\Users\v-elmacc\Documents\RopeProject\warandpeace.txt";
-        StreamReader readFile = new StreamReader(@"C:\Users\v-elmacc\Documents\RopeProject\warandpeace.txt");
->>>>>>> 4ecd49ad49beb55b3d3f2a23e69ee660ad743658
         string warPeace = File.ReadAllText(@"C:\Users\v-elmacc\Documents\RopeProject\warandpeace.txt");
         string foxSentence = "The quick brown fox jumps over the lazy dog.";
         
@@ -53,6 +48,7 @@ namespace RopeTest
                     memStart = GC.GetTotalMemory(true);
 
                     //Start stopwatch.
+                    sw.Reset();
                     sw.Start();
                    
                     // These should be faster than converting to charArray,
@@ -85,10 +81,6 @@ namespace RopeTest
                 }
 
                 /*/////////////////////////////Test loops!!! /////////////////////////////*/
-                foreach (double element in runtimes)
-                {
-                    Console.WriteLine("runtime: " + element);
-                }
 
                 foreach (double element in memallocs)
                 {
@@ -120,6 +112,7 @@ namespace RopeTest
                     memStart = GC.GetTotalMemory(true);
 
                     // Set Stopwatch.
+                    sw.Reset();
                     sw.Start();
 
                     // Concatenate strings
@@ -143,10 +136,6 @@ namespace RopeTest
                 }
 
                 /*/////////////////////////////Test loops!!! /////////////////////////////*/
-                foreach (double element in runtimes)
-                {
-                    Console.WriteLine("runtime: " + element);
-                }
 
                 foreach (double element in memallocs)
                 {
@@ -178,8 +167,9 @@ namespace RopeTest
                     memStart = GC.GetTotalMemory(true);
 
                     //Set Stopwatch.
+                    sw.Reset();
                     sw.Start();
-                    Console.WriteLine(sw);
+               
                     // Create new stringbuilder.
                     StringBuilder combinedSB = new StringBuilder(warPeace);
 
@@ -206,10 +196,6 @@ namespace RopeTest
                 }
 
                 /*/////////////////////////////Test loops!!! /////////////////////////////*/
-                foreach (double element in runtimes)
-                {
-                    Console.WriteLine("runtime: " + element);
-                }
 
                 foreach (double element in memallocs)
                 {
@@ -239,6 +225,7 @@ namespace RopeTest
                     memStart = GC.GetTotalMemory(true);
 
                     // Start stopwatch.
+                    sw.Reset();
                     sw.Start();
 
                     // Create new BigList
@@ -266,10 +253,6 @@ namespace RopeTest
                 }
 
                 /*/////////////////////////////Test loops!!! /////////////////////////////*/
-                foreach (double element in runtimes)
-                {
-                    Console.WriteLine("runtime: " + element);
-                }
 
                 foreach (double element in memallocs)
                 {

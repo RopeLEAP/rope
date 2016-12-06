@@ -60,7 +60,7 @@ namespace RopeTest
 
             // Concatenate/Append BigList and collect garbage to clear memory.
             firstConcatTest.BigListConcatReadStrings();
-            //GC.Collect();
+           
             
             // ----------------------------- this section contains function calls to the append test class (kwame) -------------------- //
 
