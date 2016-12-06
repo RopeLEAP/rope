@@ -47,16 +47,12 @@ namespace RopeWebApp2.Services
 
         public TestModel FillLargeStructures(int newIterations)
         {
-            TestDataModel newTestData = new TestDataModel();
-            iterations = newIterations;
             // timer variables
             Stopwatch sw = new Stopwatch();
-            double builderFill = 0;
 
             // memory variables
             double memStart = 0;
             double memEnd = 0;
-            double builderMem = 0;
 
             // create an enumerable structure of the long string
             //newArray = stringLong.ToCharArray();
@@ -64,27 +60,29 @@ namespace RopeWebApp2.Services
             // time filling of data structures with a single instance of string
             // ---------------------------------------------------------------
             // metadata information
-            titleStructure = "StringBuilder";
             // fill stringbuilder
-            for (int i = 1; i < iterations + 1; i++)
+            for (int i = 1; i < newIterations + 1; i++)
             {
+                TestDataModel newTestData = new TestDataModel();
+
                 // get pre-fill memory
                 memStart = GC.GetTotalMemory(false);
                 // start timer
                 sw.Start();
                 builderLarge = new StringBuilder(stringLong);
                 sw.Stop();
+
                 memEnd = GC.GetTotalMemory(false);
-                builderMem = memEnd - memStart;
-                builderFill = sw.ElapsedMilliseconds;
+                newTestData.memory = memEnd - memStart;
+                newTestData.time = sw.ElapsedMilliseconds;
                 averageSB += averageSB;
-                newTestData.memory = builderMem;
+                
                 newTestData.id = i;
-                newTestData.time = builderFill;
                 newTestDataModel.Add(newTestData);
+                sw.Reset();
             }
             newTestModel.data = newTestDataModel;
-            newTestModel.title = titleStructure;
+            newTestModel.title = "StringBuilder";
             newTestModel.method = "Fill empty data structures a copy of War and Peace; repeat n (iterations) number of times";
             return newTestModel;
         }

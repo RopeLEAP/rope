@@ -41,6 +41,7 @@ namespace RopeTest
 
             // ----------------------------- this section contains function calls to the concat test class (liz) ---------------------- //
 
+<<<<<<< HEAD
             // Create new Concatenate Test object.
             ConcatTest firstConcatTest = new ConcatTest(5,2);
 
@@ -61,6 +62,17 @@ namespace RopeTest
             firstConcatTest.BigListConcatReadStrings();
             //GC.Collect();
             
+=======
+            //ConcatTest firstConcatTest = new ConcatTest(5,2);
+            //firstConcatTest.RopeConcatTestCreateRopes(); // Is this really running more than one concat?
+            ////Garbage collect.
+            //firstConcatTest.StringConcatReadStrings();
+            ////Garbage collect.
+            //firstConcatTest.StringBuilderConcatReadstrings();
+            ////Garbage collect
+            //firstConcatTest.BigListConcatReadStrings();
+            ////Console.ReadLine();
+>>>>>>> 4ecd49ad49beb55b3d3f2a23e69ee660ad743658
             // ----------------------------- this section contains function calls to the append test class (kwame) -------------------- //
 
         }
