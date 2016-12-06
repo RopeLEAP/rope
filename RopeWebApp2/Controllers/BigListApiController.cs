@@ -12,13 +12,18 @@ namespace RopeWebApp2.Controllers
         public HttpResponseMessage GetBigListFillTestResults(int iterations)
         {
             TestModel resultBL = new TestModel();
-            //InsertService insertService = new InsertService();
-            //insertService.ReadFiles();
-            //insertService.PrependToLargeStructures(50, 1);
             TestService testService = new Services.TestService();
             testService.ReadFiles();
             resultBL = testService.BLFillTest(iterations);
             return Request.CreateResponse(HttpStatusCode.OK, resultBL);
         }
+        //public HttpResponseMessage GetBigListInsertTestResults(int iterations)
+        //{
+        //    TestModel resultBL = new TestModel();
+        //    TestService testService = new Services.TestService();
+        //    testService.ReadFiles();
+        //    resultBL = testService.BLInsertTest(iterations);
+        //    return Request.CreateResponse(HttpStatusCode.OK, resultBL);
+        //}
     }
 }

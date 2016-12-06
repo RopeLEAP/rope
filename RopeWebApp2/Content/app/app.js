@@ -10,10 +10,10 @@
     function Main($http) {
         var vm = this;
         vm.message = 'pizza';
-        vm.getStringBuilder = getStringBuilder;
+        vm.getStringBuilder = GetStringBuilderFillTestResults;
 
         function getStringBuilder() {
-            $http.get('/api/StringBuilderApi/GetStringBuilderFillTestResults?number=' + ).then(function (results) {
+            $http.get('/api/StringBuilderApi/GetStringBuilderFillTestResults').then(function (results) {
                 vm.stringBuilderData = results.data;
             });
         };
