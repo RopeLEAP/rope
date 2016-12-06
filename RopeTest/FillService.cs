@@ -194,9 +194,9 @@ namespace RopeTest
             {
                 writeResults.WriteLine(jsonLinesR);
             }
-
         }
-        // methods to call individual results
+ 
+        // methods to call individual results as a Json object
         public string GetJsonSB()
         {
             return jsonLinesSB;
