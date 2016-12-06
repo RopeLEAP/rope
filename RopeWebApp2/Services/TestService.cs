@@ -6,6 +6,7 @@ using System.Text;
 using System.Web;
 using RopeWebApp2.Models;
 using System.IO;
+using Wintellect.PowerCollections;
 
 namespace RopeWebApp2.Services
 {
@@ -21,7 +22,6 @@ namespace RopeWebApp2.Services
         // path and reader for file I/O
         string longFilePath = @"c:\repos\files\warandpeace.txt";
         // set metadata information
-        public string titleMethod = "Fill empty data structures a copy of War and Peace; repeat n (iterations) number of times";
         public string titleStructure;
         // create an enumerable structure of the long string
         public char[] newArray;
@@ -35,9 +35,9 @@ namespace RopeWebApp2.Services
                 stringLong = File.ReadAllText(longFilePath);
             }
         }
-
         // Make the filled structures available to other tests
         public StringBuilder builderLarge;
+        public BigList<char> biglistLarge;
 
         // Get an average time for the fills
         public double averageSB;
@@ -45,8 +45,14 @@ namespace RopeWebApp2.Services
         List<TestDataModel> newTestDataModel = new List<TestDataModel>();
         TestModel newTestModel = new TestModel();
 
-        public TestModel FillLargeStructures(int newIterations)
+        public TestModel SBFillTest(int newIterations)
         {
+            // A test that fills the data structure with the text of war and peace N (newIterations) times, clearing the structure between each fill
+            // --------------- First data structure: StringBuilder
+            // metadata information
+            newTestModel.title = "StringBuilder";
+            newTestModel.method = ($"Fill empty data structures with a copy of War and Peace; repeat {newIterations} times");
+
             // timer variables
             Stopwatch sw = new Stopwatch();
 
@@ -54,13 +60,11 @@ namespace RopeWebApp2.Services
             double memStart = 0;
             double memEnd = 0;
 
-            // create an enumerable structure of the long string
+            // create an enumerable structure of the long string, required for the Rope constructor
             //newArray = stringLong.ToCharArray();
 
             // time filling of data structures with a single instance of string
             // ---------------------------------------------------------------
-            // metadata information
-            // fill stringbuilder
             for (int i = 1; i < newIterations + 1; i++)
             {
                 TestDataModel newTestData = new TestDataModel();
@@ -82,12 +86,54 @@ namespace RopeWebApp2.Services
                 sw.Reset();
             }
             newTestModel.data = newTestDataModel;
-            newTestModel.title = "StringBuilder";
-            newTestModel.method = "Fill empty data structures a copy of War and Peace; repeat n (iterations) number of times";
             return newTestModel;
         }
 
+        //public TestModel BLFillTest(int newIterations)
+        //{
+        //    // A test that fills the data structure with the text of war and peace N (newIterations) times, clearing the structure between each fill
+        //    // --------------- Second data structure: BigList
+        //    // metadata information
+        //    newTestModel.title = "BigList";
+        //    newTestModel.method = ($"Fill empty data structures with a copy of War and Peace; repeat {newIterations} times");
 
+        //    // timer variables
+        //    Stopwatch sw = new Stopwatch();
+
+        //    // memory variables
+        //    double memStart = 0;
+        //    double memEnd = 0;
+
+        //    // create an enumerable structure of the long string
+        //    newArray = stringLong.ToCharArray();
+
+        //    // time filling of data structures with a single instance of string
+        //    // ---------------------------------------------------------------
+        //    for (int i = 1; i < newIterations + 1; i++)
+        //    {
+        //        TestDataModel newTestData = new TestDataModel();
+
+        //        // get pre-fill memory
+        //        memStart = GC.GetTotalMemory(false);
+        //        // start timer
+        //        sw.Start();
+        //        biglistLarge = new BigList<char>(newArray);
+        //        sw.Stop();
+
+        //        memEnd = GC.GetTotalMemory(false);
+        //        newTestData.memory = memEnd - memStart;
+        //        newTestData.time = sw.ElapsedMilliseconds;
+        //        averageSB += averageSB;
+
+        //        newTestData.id = i;
+        //        newTestDataModel.Add(newTestData);
+        //        sw.Reset();
+        //    }
+        //    newTestModel.data = newTestDataModel;
+        //    return newTestModel;
+        //}
+
+        // David - do we need this?
         public TestModel SBInsert()
         {
             TestModel data = new TestModel();
