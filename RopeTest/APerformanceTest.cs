@@ -6,9 +6,14 @@ using System.Threading.Tasks;
 
 namespace RopeTest
 {
-    abstract public class AMethods
+    abstract public class APerformanceTest
     {
+        protected int iterations;
 
+        public APerformanceTest(int iteration)
+        {
+            iterations = iteration;
+        }
 
         abstract public void Concatenate();
         abstract public void Split();
