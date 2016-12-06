@@ -14,16 +14,24 @@ namespace RopeWebApp2.Controllers
             TestModel resultBL = new TestModel();
             TestService testService = new Services.TestService();
             testService.ReadFiles();
-            resultBL = testService.BLFillTest(iterations);
+            resultBL = testService.FillTest(iterations, "BigList");
             return Request.CreateResponse(HttpStatusCode.OK, resultBL);
         }
-        //public HttpResponseMessage GetBigListInsertTestResults(int iterations)
-        //{
-        //    TestModel resultBL = new TestModel();
-        //    TestService testService = new Services.TestService();
-        //    testService.ReadFiles();
-        //    resultBL = testService.BLInsertTest(iterations);
-        //    return Request.CreateResponse(HttpStatusCode.OK, resultBL);
-        //}
+        public HttpResponseMessage GetBigListIPrependTestResults(int iterations)
+        {
+            TestModel resultBL = new TestModel();
+            TestService testService = new Services.TestService();
+            testService.ReadFiles();
+            resultBL = testService.PrependTest(iterations, "BigList");
+            return Request.CreateResponse(HttpStatusCode.OK, resultBL);
+        }
+        public HttpResponseMessage GetBigListMidInsertTestResults(int iterations)
+        {
+            TestModel resultBL = new TestModel();
+            TestService testService = new Services.TestService();
+            testService.ReadFiles();
+            resultBL = testService.MidInsertTest(iterations, "BigList");
+            return Request.CreateResponse(HttpStatusCode.OK, resultBL);
+        }
     }
 }

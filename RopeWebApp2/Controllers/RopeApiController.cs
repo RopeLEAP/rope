@@ -12,21 +12,26 @@ namespace RopeWebApp2.Controllers
         public HttpResponseMessage GetRopeFillTestResults(int iterations)
         {
             TestModel resultRope = new TestModel();
-            //InsertService insertService = new InsertService();
-            //insertService.ReadFiles();
-            //insertService.PrependToLargeStructures(50, 1);
             TestService testService = new Services.TestService();
             testService.ReadFiles();
-            resultRope = testService.RopeFillTest(iterations);
+            resultRope = testService.FillTest(iterations, "Rope");
             return Request.CreateResponse(HttpStatusCode.OK, resultRope);
         }
-        //public HttpResponseMessage GetRopeInsertTestResults(int iterations)
-        //{
-        //    TestModel resultRope = new TestModel();
-        //    TestService testService = new Services.TestService();
-        //    testService.ReadFiles();
-        //    resultRope = testService.RopeInsertTest(iterations);
-        //    return Request.CreateResponse(HttpStatusCode.OK, resultRope);
-        //}
+        public HttpResponseMessage GetRopePrependTestResults(int iterations)
+        {
+            TestModel resultRope = new TestModel();
+            TestService testService = new Services.TestService();
+            testService.ReadFiles();
+            resultRope = testService.PrependTest(iterations, "Rope");
+            return Request.CreateResponse(HttpStatusCode.OK, resultRope);
+        }
+        public HttpResponseMessage GetRopeMidInsertTestResults(int iterations)
+        {
+            TestModel resultRope = new TestModel();
+            TestService testService = new Services.TestService();
+            testService.ReadFiles();
+            resultRope = testService.MidInsertTest(iterations, "Rope");
+            return Request.CreateResponse(HttpStatusCode.OK, resultRope);
+        }
     }
 }

@@ -10,11 +10,15 @@
     function Main($http) {
         var vm = this;
         vm.message = 'pizza';
-        vm.getStringBuilder = GetStringBuilderFillTestResults;
+        vm.getStringBuilderFillTestResults = getStringBuilderFillTestResults;
+        vm.iterations = null;
 
-        function getStringBuilder() {
-            $http.get('/api/StringBuilderApi/GetStringBuilderFillTestResults').then(function (results) {
-                vm.stringBuilderData = results.data;
+        function getStringBuilderFillTestResults() {
+            var url = '/api/StringBuilderApi/GetStringBuilderFillTestResults?iterations=';
+            url += vm.iterations;
+
+            $http.get(url).then(function (results) {
+                vm.stringBuilderFillTestData = results.data;
             });
         };
     }
