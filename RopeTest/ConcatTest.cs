@@ -21,15 +21,19 @@ namespace RopeTest
         }
 
         // Filepaths
-        string warPeacePath = @"C:\Users\v-elmacc\Documents\RopeProject\warandpeace.txt";
+        //string warPeacePath = @"C:\Users\v-elmacc\Documents\RopeProject\warandpeace.txt";
+        StreamReader readFile = new StreamReader(@"C:\Users\v-elmacc\Documents\RopeProject\warandpeace.txt");
+        string warPeace = File.ReadAllText(@"C:\Users\v-elmacc\Documents\RopeProject\warandpeace.txt");
 
+        string foxSentence = "The quick brown fox jumps over the lazy dog.";
+        
         // Create stopwatch. 
         Stopwatch sw = new Stopwatch();
 
         // memory variables
-        double memStart = 0;
-        double memEnd = 0;
-        double memUsed = 0;
+        long memStart = 0;
+        long memEnd = 0;
+        long memUsed = 0;
 
         // Method to Concatenate Ropes.
         public void RopeConcatTestCreateRopes()
@@ -44,7 +48,11 @@ namespace RopeTest
                 for( i = 0; i < fNumIterations; i++)
                 {
                     //Get memory pre-operation.
-                    memStart = GC.GetTotalMemory(false);
+                    memStart = GC.GetTotalMemory(true);
+
+                    // Short
+                    //string foxSentence = "The quick brown fox jumps over the lazy dog.";
+                    //char[] foxSentenceArray = foxSentence.ToCharArray();
 
                     // Set Stopwatch.
                     sw.Start();
@@ -52,23 +60,29 @@ namespace RopeTest
                     // Read in Strings.
 
                     // Long
+                    /*
                     StreamReader readFile = new StreamReader(warPeacePath);
                     string warPeace = File.ReadAllText(warPeacePath);
-
-                    // Short
-                    string foxSentence = "The quick brown fox jumps over the lazy dog.";
+                    */
 
 
                     // Create new char arrays to populate ropes.
-                    char[] warPeaceArray = warPeace.ToCharArray();
-                    char[] foxSentenceArray = foxSentence.ToCharArray();
+                    //char[] warPeaceArray = warPeace.ToCharArray();
 
                     // Fill Ropes.
+
+                    /*
                     Rope.Rope<char> ropeWarPeace = new Rope.Rope<char>(warPeaceArray, 0, warPeaceArray.Length);
                     Rope.Rope<char> ropeFoxSentence = new Rope.Rope<char>(foxSentenceArray, 0, foxSentenceArray.Length);
+                    */
+
+                    //these should be faster than converting to charArray, and then you can just read the file in the very beginning and not count that in the time & memory!
+                    Rope.Rope<string> ropeWarPeace = new Rope.Rope<string>(warPeace.Split(" ".ToCharArray()), 0 , warPeace.Length); //splits on word, can split on sentence too.
+                    Rope.Rope<string> ropeFoxSentence = new Rope.Rope<string>(foxSentence.Split(" ".ToCharArray()), 0, foxSentence.Length);
 
                     // Concatenate Ropes.
-                    Rope.Rope<char> ropeConcat = Rope.Rope<char>.Concat(ropeWarPeace, ropeFoxSentence);
+                    //Rope.Rope<char> ropeConcat = Rope.Rope<char>.Concat(ropeWarPeace, ropeFoxSentence);
+                    Rope.Rope<string> ropeConcat = Rope.Rope<string>.Concat(ropeWarPeace, ropeFoxSentence);
 
                     // Time Stop
                     sw.Stop();
@@ -76,6 +90,7 @@ namespace RopeTest
                     // Get Memory after operation.
                     memEnd = GC.GetTotalMemory(false);
 
+                    Console.WriteLine("Start {0} \nEnd {1}", memStart , memEnd);
                     //Calculate total memory.
                     memUsed = memEnd - memStart;
 

@@ -41,8 +41,11 @@ namespace RopeTest
 
             ConcatTest firstConcatTest = new ConcatTest(5,2);
             firstConcatTest.RopeConcatTestCreateRopes(); // Is this really running more than one concat?
+            //Garbage collect.
             firstConcatTest.StringConcatReadStrings();
+            //Garbage collect.
             firstConcatTest.StringBuilderConcatReadstrings();
+            //Garbage collect
             firstConcatTest.BigListConcatReadStrings();
             //Console.ReadLine();
             // ----------------------------- this section contains function calls to the append test class (kwame) -------------------- //
