@@ -9,7 +9,7 @@ namespace RopeTest
         {
             // ----------------------------- this section contains function calls to the fill and insert service classes (sid) ----------------------- //
 
-
+            /*
             //strings to hold json results
             string resultStringBuilder;
             string resultBigList;
@@ -37,19 +37,30 @@ namespace RopeTest
 
             Console.WriteLine("Done!");
             Console.ReadLine();
-
+            */
 
             // ----------------------------- this section contains function calls to the concat test class (liz) ---------------------- //
 
+            // Create new Concatenate Test object.
             ConcatTest firstConcatTest = new ConcatTest(5,2);
-            firstConcatTest.RopeConcatTestCreateRopes(); // Is this really running more than one concat?
-            //Garbage collect.
+
+            // Concatenate ropes and collect garbage to clear memory.
+            //Possibly need to change split on this in the class, since it's now not the same len as the others.
+            firstConcatTest.RopeConcatTestCreateRopes(); 
+            GC.Collect();
+            
+            // Concatenate strings and collect garbage to clear memory.
             firstConcatTest.StringConcatReadStrings();
-            //Garbage collect.
+            GC.Collect();
+
+            // Concatenate/Append StringBuilder and collect garbage to clear memory.
             firstConcatTest.StringBuilderConcatReadstrings();
-            //Garbage collect
+            GC.Collect();
+
+            // Concatenate/Append BigList and collect garbage to clear memory.
             firstConcatTest.BigListConcatReadStrings();
-            //Console.ReadLine();
+            //GC.Collect();
+            
             // ----------------------------- this section contains function calls to the append test class (kwame) -------------------- //
 
         }

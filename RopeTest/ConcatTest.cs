@@ -14,23 +14,20 @@ namespace RopeTest
         int fNumIterations;
         int fNumReplications;
 
-        public ConcatTest(int numIterations, int numreplications)
+        public ConcatTest(int numIterations, int numreplications) //print results for each replication?
         {
             fNumReplications = numreplications;
             fNumIterations = numIterations;
         }
 
         // Filepaths
-        //string warPeacePath = @"C:\Users\v-elmacc\Documents\RopeProject\warandpeace.txt";
-        //StreamReader readFile = new StreamReader(@"C:\Users\v-elmacc\Documents\RopeProject\warandpeace.txt"); // Probably don't need this line. Run and make sure
         string warPeace = File.ReadAllText(@"C:\Users\v-elmacc\Documents\RopeProject\warandpeace.txt");
-
         string foxSentence = "The quick brown fox jumps over the lazy dog.";
         
         // Create stopwatch. 
         Stopwatch sw = new Stopwatch();
 
-        // memory variables
+        // Memory variables
         long memStart = 0;
         long memEnd = 0;
         long memUsed = 0;
@@ -38,119 +35,87 @@ namespace RopeTest
         // Method to Concatenate Ropes.
         public void RopeConcatTestCreateRopes()
         {
-            //Lists to calculate averages. See if you can declare these once and reset?
-            List<int> lengths = new List<int>();
-            List<double> memallocs = new List<double>();
-            List<double> runtimes = new List<double>();
-
-            for (int i = 0; i < fNumReplications; i++) 
-            {
-                for( i = 0; i < fNumIterations; i++)
-                {
-                    //Get memory pre-operation.
-                    memStart = GC.GetTotalMemory(true);
-
-                    // Short
-                    //string foxSentence = "The quick brown fox jumps over the lazy dog.";
-                    //char[] foxSentenceArray = foxSentence.ToCharArray();
-
-                    // Set Stopwatch.
-                    sw.Start();
-
-                    // Read in Strings.
-
-                    // Long
-                    /*
-                    StreamReader readFile = new StreamReader(warPeacePath);
-                    string warPeace = File.ReadAllText(warPeacePath);
-                    */
-
-
-                    // Create new char arrays to populate ropes.
-                    //char[] warPeaceArray = warPeace.ToCharArray();
-
-                    // Fill Ropes.
-
-                    /*
-                    Rope.Rope<char> ropeWarPeace = new Rope.Rope<char>(warPeaceArray, 0, warPeaceArray.Length);
-                    Rope.Rope<char> ropeFoxSentence = new Rope.Rope<char>(foxSentenceArray, 0, foxSentenceArray.Length);
-                    */
-
-                    //these should be faster than converting to charArray, and then you can just read the file in the very beginning and not count that in the time & memory!
-                    Rope.Rope<string> ropeWarPeace = new Rope.Rope<string>(warPeace.Split(" ".ToCharArray())); //splits on word, can split on sentence too.
-                    Rope.Rope<string> ropeFoxSentence = new Rope.Rope<string>(foxSentence.Split(" ".ToCharArray()));
-
-                    // Concatenate Ropes.
-                    //Rope.Rope<char> ropeConcat = Rope.Rope<char>.Concat(ropeWarPeace, ropeFoxSentence);
-                    Rope.Rope<string> ropeConcat = Rope.Rope<string>.Concat(ropeWarPeace, ropeFoxSentence);
-
-                    // Time Stop
-                    sw.Stop();
-
-                    // Get Memory after operation.
-                    memEnd = GC.GetTotalMemory(false);
-
-                    Console.WriteLine("Start {0} \nEnd {1}", memStart , memEnd);
-                    //Calculate total memory.
-                    memUsed = memEnd - memStart;
-
-                    // Append values to each list.
-                    lengths.Add(ropeConcat.Length);
-                    memallocs.Add(memUsed); 
-                    runtimes.Add(sw.ElapsedMilliseconds);
-
-                    /*/////////////////////////////Test loops!!! /////////////////////////////*/
-
-                    foreach (int element in lengths)
-                    {
-                        Console.WriteLine("Length: " + element);
-                    }
-                    foreach (double element in runtimes)
-                    {
-                        Console.WriteLine("Runtime: " + element);
-                    }
-
-                    foreach(double element in memallocs)
-                    {
-                        Console.WriteLine("Memory: " + element);
-                    }
-                    
-                }
-
-                // Print averages of ropeConcat.Length, Runtime, for each rep and export to JSON
-                //Print time Will need to be JSON EXPORT!
-                Console.WriteLine("Length of new rope: " + lengths.Sum() / lengths.Count() + " characters" +
-                    "\nRuntime: " + runtimes.Sum()/lengths.Count() + " ms" +
-                    "\nMemory used: " + memallocs.Sum()/memallocs.Count() + " bytes");
-            }   
-        }
-
-        //Standard String Concat
-        public void StringConcatReadStrings()
-        {
-            //Lists to calculate averages.
+            // Lists to calculate averages. See if you can declare these once and reset?
             List<int> lengths = new List<int>();
             List<double> memallocs = new List<double>();
             List<double> runtimes = new List<double>();
 
             for (int i = 0; i < fNumReplications; i++)
             {
-                for (i = 0; i < fNumIterations; i++)
+                for (int j = 0; j < fNumIterations; j++)
+                {
+                    // Get memory pre-operation.
+                    memStart = GC.GetTotalMemory(true);
+
+                    //Start stopwatch.
+                    sw.Start();
+                   
+                    // These should be faster than converting to charArray,
+                    //and then you can just read the file in the very beginning 
+                    //and not count that in the time & memory!
+                    Rope.Rope<string> ropeWarPeace = new Rope.Rope<string>
+                        (warPeace.Split(" ".ToCharArray())); //splits on word, can split on sentence too.
+                    Rope.Rope<string> ropeFoxSentence = new Rope.Rope<string>
+                        (foxSentence.Split(" ".ToCharArray()));
+
+                    // Concatenate Ropes.
+                    // This is shorter than the others now since it's splitting on words...
+                    Rope.Rope<string> ropeConcat = Rope.Rope<string>.Concat(ropeWarPeace, ropeFoxSentence);
+
+                    // Stop timer.
+                    sw.Stop();
+
+                    // Get Memory after operation.
+                    memEnd = GC.GetTotalMemory(false);
+
+                    Console.WriteLine("Start {0} End {1}", memStart, memEnd);
+
+                    //Calculate total memory.
+                    memUsed = memEnd - memStart;
+
+                    // Append values to each list.
+                    lengths.Add(ropeConcat.Length);
+                    memallocs.Add(memUsed);
+                    runtimes.Add(sw.ElapsedMilliseconds);
+                }
+
+                /*/////////////////////////////Test loops!!! /////////////////////////////*/
+                foreach (double element in runtimes)
+                {
+                    Console.WriteLine("runtime: " + element);
+                }
+
+                foreach (double element in memallocs)
+                {
+                    Console.WriteLine("Memory: " + element);
+                }
+
+                // Print averages of ropeConcat.Length, Runtime, for each rep and export to JSON
+                // Print time will need to be JSON EXPORT!
+                Console.WriteLine("Length of new rope: " + lengths.Sum() / lengths.Count() + " characters" +
+                        "\nRuntime: " + runtimes.Sum() / lengths.Count() + " ms" +
+                        "\nMemory used: " + memallocs.Sum() / memallocs.Count() + " bytes");
+            }    
+        }
+
+        // Standard String Concatenate
+        public void StringConcatReadStrings()
+        {
+            // Lists to calculate averages.
+            List<int> lengths = new List<int>();
+            List<double> memallocs = new List<double>();
+            List<double> runtimes = new List<double>();
+
+            for (int i = 0; i < fNumReplications; i++)
+            {
+                for (int j = 0; j < fNumIterations; j++)
                 {
 
-                    //Get memory pre-operation.
-                    memStart = GC.GetTotalMemory(false);
+                    // Get memory pre-operation.
+                    memStart = GC.GetTotalMemory(true);
 
                     // Set Stopwatch.
                     sw.Start();
-
-                    // Read in Strings.
-
-                    // Long
-                   //string warPeace = File.ReadAllText(warPeacePath);
-
-                    // Short
-                    //string foxSentence = "The quick brown fox jumps over the lazy dog.";
 
                     // Concatenate strings
                     string stringConcat = warPeace + foxSentence;
@@ -161,34 +126,32 @@ namespace RopeTest
                     // Get Memory after operation.
                     memEnd = GC.GetTotalMemory(false);
 
+                    Console.WriteLine("Start {0} End {1}", memStart, memEnd);
+
                     //Calculate total memory.
                     memUsed = memEnd - memStart;
 
                     // Append values to each list.
                     lengths.Add(stringConcat.Length);
-                    memallocs.Add(memUsed); 
+                    memallocs.Add(memUsed);
                     runtimes.Add(sw.ElapsedMilliseconds);
+                }
 
-                    /*/////////////////////////////Test loops!!! /////////////////////////////*/
-                    foreach (int element in lengths)
-                    {
-                        Console.WriteLine("Length " + element);
-                    }
-                    foreach (double element in runtimes)
-                    {
-                        Console.WriteLine( "Runtime: " + element);
-                    }
+                /*/////////////////////////////Test loops!!! /////////////////////////////*/
+                foreach (double element in runtimes)
+                {
+                    Console.WriteLine("runtime: " + element);
+                }
 
-                    foreach (double element in memallocs)
-                    {
-                        Console.WriteLine( "Memory: " + element);
-                    }
+                foreach (double element in memallocs)
+                {
+                    Console.WriteLine("Memory: " + element);
                 }
 
                 // Print time
                 Console.WriteLine("Length of new string: " + lengths.Sum() / lengths.Count() + " characters" +
-                        "\nRuntime: " + runtimes.Sum() / lengths.Count() + " ms" +
-                        "\nMemory used: " + memallocs.Sum() / memallocs.Count() + " bytes");
+                            "\nRuntime: " + runtimes.Sum() / lengths.Count() + " ms" +
+                            "\nMemory used: " + memallocs.Sum() / memallocs.Count() + " bytes");
             }
         }
 
@@ -203,23 +166,15 @@ namespace RopeTest
 
             for (int i = 0; i < fNumReplications; i++)
             {
-                for (i = 0; i < fNumIterations; i++)
+                for (int j = 0; j < fNumIterations; j++)
                 {
 
                     //Get memory pre-operation.
-                    memStart = GC.GetTotalMemory(false);
+                    memStart = GC.GetTotalMemory(true);
 
                     //Set Stopwatch.
                     sw.Start();
-
-                    //Read in Strings.
-
-                    // Long
-                    //string warPeace = File.ReadAllText(warPeacePath);
-
-                    // Short
-                    //string foxSentence = "The quick brown fox jumps over the lazy dog.";
-
+                    Console.WriteLine(sw);
                     // Create new stringbuilder.
                     StringBuilder combinedSB = new StringBuilder(warPeace);
 
@@ -232,6 +187,8 @@ namespace RopeTest
                     // Get Memory after operation.
                     memEnd = GC.GetTotalMemory(false);
 
+                    Console.WriteLine("Start {0} End {1}", memStart, memEnd);
+                    
                     //Calculate total memory.
                     memUsed = memEnd - memStart;
 
@@ -240,20 +197,18 @@ namespace RopeTest
                     memallocs.Add(memUsed); 
                     runtimes.Add(sw.ElapsedMilliseconds);
 
-                    /*/////////////////////////////Test loops!!! /////////////////////////////*/
-                    foreach (int element in lengths)
-                    {
-                        Console.WriteLine("Length " + element);
-                    }
-                    foreach (double element in runtimes)
-                    {
-                        Console.WriteLine("Runtime: " + element);
-                    }
 
-                    foreach (double element in memallocs)
-                    {
-                        Console.WriteLine("Memory: " + element);
-                    }
+                }
+
+                /*/////////////////////////////Test loops!!! /////////////////////////////*/
+                foreach (double element in runtimes)
+                {
+                    Console.WriteLine("runtime: " + element);
+                }
+
+                foreach (double element in memallocs)
+                {
+                    Console.WriteLine("Memory: " + element);
                 }
 
                 //Print time
@@ -273,21 +228,13 @@ namespace RopeTest
 
             for (int i = 0; i < fNumReplications; i++)
             {
-                for (i = 0; i < fNumIterations; i++)
+                for (int j = 0; j < fNumIterations; j++)
                 {
                     //Get memory pre-operation.
-                    memStart = GC.GetTotalMemory(false);
+                    memStart = GC.GetTotalMemory(true);
 
                     // Start stopwatch.
                     sw.Start();
-
-                    // Read in strings.
-
-                    // Long
-                    //string warPeace = File.ReadAllText(warPeacePath);
-
-                    // Short
-                    //string foxSentence = "The quick brown fox jumps over the lazy dog.";
 
                     // Create new BigList
                     BigList<char> combinedBL = new BigList<char>(warPeace);
@@ -301,6 +248,8 @@ namespace RopeTest
                     // Get Memory after operation.
                     memEnd = GC.GetTotalMemory(false);
 
+                    Console.WriteLine("Start {0} End {1}", memStart, memEnd);
+
                     //Calculate total memory.
                     memUsed = memEnd - memStart;
 
@@ -309,23 +258,21 @@ namespace RopeTest
                     memallocs.Add(memUsed);
                     runtimes.Add(sw.ElapsedMilliseconds);
 
-                    /*/////////////////////////////Test loops!!! /////////////////////////////*/
-                    foreach (int element in lengths)
-                    {
-                        Console.WriteLine("Length " + element);
-                    }
-                    foreach (double element in runtimes)
-                    {
-                        Console.WriteLine("Runtime: " + element);
-                    }
-
-                    foreach (double element in memallocs)
-                    {
-                        Console.WriteLine("Memory: " + element);
-                    }
                 }
+
+                /*/////////////////////////////Test loops!!! /////////////////////////////*/
+                foreach (double element in runtimes)
+                {
+                    Console.WriteLine("runtime: " + element);
+                }
+
+                foreach (double element in memallocs)
+                {
+                    Console.WriteLine("Memory: " + element);
+                }
+
                 // Print results
-                Console.WriteLine("Length of new stringBuilder: " + lengths.Sum() / lengths.Count() + " characters" +
+                Console.WriteLine("Length of new BigList: " + lengths.Sum() / lengths.Count() + " characters" +
                         "\nRuntime: " + runtimes.Sum() / lengths.Count() + " ms" +
                         "\nMemory used: " + memallocs.Sum() / memallocs.Count() + " bytes");
 
