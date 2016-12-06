@@ -21,7 +21,7 @@ namespace RopeWebApp2.Controllers
             TestService testService = new Services.TestService();
             testService.ReadFiles();
             resultRope = testService.FillLargeStructures(5);
-            return Request.CreateResponse(HttpStatusCode.OK, testService);
+            return Request.CreateResponse(HttpStatusCode.OK, resultRope);
         }
     }
 }
