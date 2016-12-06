@@ -13,7 +13,7 @@
         vm.getStringBuilder = getStringBuilder;
 
         function getStringBuilder() {
-            $http.get('/api/RopeApi').then(function (results) {
+            $http.get('/api/StringBuilderApi/GetStringBuilderFillTestResults?number=' + ).then(function (results) {
                 vm.stringBuilderData = results.data;
             });
         };

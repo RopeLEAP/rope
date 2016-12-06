@@ -9,7 +9,7 @@ namespace RopeWebApp2.Controllers
     public class BigListApiController : ApiController
     {
         // Run and return BigList tests
-        public HttpResponseMessage GetBigListFillTestResults()
+        public HttpResponseMessage GetBigListFillTestResults(int iterations)
         {
             TestModel resultBL = new TestModel();
             //InsertService insertService = new InsertService();
@@ -17,7 +17,7 @@ namespace RopeWebApp2.Controllers
             //insertService.PrependToLargeStructures(50, 1);
             TestService testService = new Services.TestService();
             testService.ReadFiles();
-            resultBL = testService.BLFillTest(5);
+            resultBL = testService.BLFillTest(iterations);
             return Request.CreateResponse(HttpStatusCode.OK, resultBL);
         }
     }
