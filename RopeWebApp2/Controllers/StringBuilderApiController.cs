@@ -25,5 +25,13 @@ namespace RopeWebApp2.Controllers
             resultSB = testService.PrependTest(iterations, "StringBuilder");
             return Request.CreateResponse(HttpStatusCode.OK, resultSB);
         }
+        public HttpResponseMessage GetStringBuilderMidInsertTestResults(int iterations)
+        {
+            TestModel resultSB = new TestModel();
+            TestService testService = new Services.TestService();
+            testService.ReadFiles();
+            resultSB = testService.MidInsertTest(iterations, "StringBuilder");
+            return Request.CreateResponse(HttpStatusCode.OK, resultSB);
+        }
     }
 }

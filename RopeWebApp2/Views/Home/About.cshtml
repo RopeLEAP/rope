@@ -7,9 +7,10 @@
 
 <div ng-controller="Main as main">
 
-    <button ng-click="main.getStringBuilder()">String Builder Test</button>
+    <button ng-click="main.getStringBuilderFillTestResults()">String Builder Test</button>
+    <input ng-model="main.iterations"/>
     <h3>{{main.stringBuilderData.method}}</h3>
-        <table class="table table-striped" ng-show="main.stringBuilderData">
+        <table class="table table-striped" ng-show="main.stringBuilderFillTestData">
             <thead>
                 <tr>
                     <th>Iteration</th>
@@ -18,7 +19,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="test in main.stringBuilderData.data">
+                <tr ng-repeat="test in main.stringBuilderFillTestData.data">
                     <td>{{test.id}}</td>
                     <td>{{test.memory}}</td>
                     <td>{{test.time}}</td>

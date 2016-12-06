@@ -25,5 +25,13 @@ namespace RopeWebApp2.Controllers
             resultRope = testService.PrependTest(iterations, "Rope");
             return Request.CreateResponse(HttpStatusCode.OK, resultRope);
         }
+        public HttpResponseMessage GetRopeMidInsertTestResults(int iterations)
+        {
+            TestModel resultRope = new TestModel();
+            TestService testService = new Services.TestService();
+            testService.ReadFiles();
+            resultRope = testService.MidInsertTest(iterations, "Rope");
+            return Request.CreateResponse(HttpStatusCode.OK, resultRope);
+        }
     }
 }

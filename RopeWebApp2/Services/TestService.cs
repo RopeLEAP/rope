@@ -114,60 +114,6 @@ namespace RopeWebApp2.Services
                 {
                     case "StringBuilder":
                         newTestModel.title = "StringBuilder";
-                        newTestModel.method = ($"Fill empty data structures with a copy of War and Peace; repeat {newIterations} times");
-                        sw.Start();
-                        builderLarge = new StringBuilder(stringLong);
-                        sw.Stop();
-                        break;
-                    case "BigList":
-                        newTestModel.title = "BigList";
-                        newTestModel.method = ($"Fill empty data structures with a copy of War and Peace; repeat {newIterations} times");
-                        sw.Start();
-                        biglistLarge = new BigList<char>(newArray);
-                        sw.Stop();
-                        break;
-                    case "Rope":
-                        newTestModel.title = "Rope";
-                        newTestModel.method = ($"Fill empty data structures with a copy of War and Peace; repeat {newIterations} times");
-                        sw.Start();
-                        ropeLarge = new Rope.Rope<char>(newArray, 0, newArray.Length);
-                        sw.Stop();
-                        break;
-                }
-
-                memEnd = GC.GetTotalMemory(false);
-                newTestData.memory = memEnd - memStart;
-                newTestData.time = sw.ElapsedTicks;
-                averageTime += newTestData.time;
-                averageMemory += newTestData.memory;
-
-                newTestData.id = i;
-                newTestDataModel.Add(newTestData);
-                sw.Reset();
-
-            }
-            newTestModel.averageTime = averageTime / newIterations;
-            newTestModel.averageMemory = averageMemory / newIterations;
-            newTestModel.data = newTestDataModel;
-            return newTestModel;
-        }
-
-        // Prepend test
-        public TestModel MidInsertTest(int newIterations, string structureName)
-        {
-            long memStart = 0, memEnd = 0;
-
-            for (int i = 1; i < newIterations + 1; i++)
-            {
-                TestDataModel newTestData = new TestDataModel();
-
-                // get pre-fill memory
-                memStart = GC.GetTotalMemory(true);
-
-                switch (structureName)
-                {
-                    case "StringBuilder":
-                        newTestModel.title = "StringBuilder";
                         newTestModel.method = ($"Prepend a copy of War and Peace into data structure; repeat {newIterations} times");
                         sw.Start();
                         builderLarge.Insert(0, stringLong);
@@ -188,6 +134,62 @@ namespace RopeWebApp2.Services
                         newTestModel.method = ($"Prepend a copy of War and Peace into data structure; repeat {newIterations} times");
                         sw.Start();
                         ropeLarge.AddRange(newArray, 0, newArray.Length);
+                        sw.Stop();
+                        break;
+                }
+                memEnd = GC.GetTotalMemory(false);
+                newTestData.memory = memEnd - memStart;
+                newTestData.time = sw.ElapsedTicks;
+                averageTime += newTestData.time;
+                averageMemory += newTestData.memory;
+
+                newTestData.id = i;
+                newTestDataModel.Add(newTestData);
+                sw.Reset();
+
+            }
+            newTestModel.averageTime = averageTime / newIterations;
+            newTestModel.averageMemory = averageMemory / newIterations;
+            newTestModel.data = newTestDataModel;
+            return newTestModel;
+        }
+
+        // Insert in middle of structure test
+        public TestModel MidInsertTest(int newIterations, string structureName)
+        {
+            long memStart = 0, memEnd = 0;
+
+            for (int i = 1; i < newIterations + 1; i++)
+            {
+                TestDataModel newTestData = new TestDataModel();
+
+                // get pre-fill memory
+                memStart = GC.GetTotalMemory(true);
+
+                switch (structureName)
+                {
+                    case "StringBuilder":
+                        newTestModel.title = "StringBuilder";
+                        newTestModel.method = ($"Insert a copy of War and Peace into middle of data structure; repeat {newIterations} times");
+                        sw.Start();
+                        builderLarge.Insert(builderLarge.Length/2, stringLong);
+                        sw.Stop();
+                        break;
+                    case "BigList":
+                        newTestModel.title = "BigList";
+                        newTestModel.method = ($"Insert a copy of War and Peace into middle of data structure; repeat {newIterations} times");
+                        sw.Start();
+                        foreach (char letter in newArray)
+                        {
+                            biglistLarge.Insert(biglistLarge.Count/2, letter);
+                        }
+                        sw.Stop();
+                        break;
+                    case "Rope":
+                        newTestModel.title = "Rope";
+                        newTestModel.method = ($"Insert a copy of War and Peace into middle of data structure; repeat {newIterations} times");
+                        sw.Start();
+                        ropeLarge.AddRange(newArray, ropeLarge.Length/2, newArray.Length);
                         sw.Stop();
                         break;
                 }
