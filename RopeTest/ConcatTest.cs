@@ -21,7 +21,7 @@ namespace RopeTest
         }
 
         // Filepaths
-        //string warPeacePath = @"C:\Users\v-elmacc\Documents\RopeProject\warandpeace.txt";
+        string warPeacePath = @"C:\Users\v-elmacc\Documents\RopeProject\warandpeace.txt";
         StreamReader readFile = new StreamReader(@"C:\Users\v-elmacc\Documents\RopeProject\warandpeace.txt");
         string warPeace = File.ReadAllText(@"C:\Users\v-elmacc\Documents\RopeProject\warandpeace.txt");
 
