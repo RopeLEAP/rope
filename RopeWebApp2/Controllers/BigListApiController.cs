@@ -14,7 +14,7 @@ namespace RopeWebApp2.Controllers
             TestModel resultBL = new TestModel();
             TestService testService = new Services.TestService();
             testService.ReadFiles();
-            resultBL = testService.BLFillTest(iterations);
+            resultBL = testService.FillTest(iterations, "BigList");
             return Request.CreateResponse(HttpStatusCode.OK, resultBL);
         }
         public HttpResponseMessage GetBigListIPrependTestResults(int iterations)
@@ -22,7 +22,7 @@ namespace RopeWebApp2.Controllers
             TestModel resultBL = new TestModel();
             TestService testService = new Services.TestService();
             testService.ReadFiles();
-            resultBL = testService.BLPrependTest(iterations);
+            resultBL = testService.PrependTest(iterations, "BigList");
             return Request.CreateResponse(HttpStatusCode.OK, resultBL);
         }
     }
