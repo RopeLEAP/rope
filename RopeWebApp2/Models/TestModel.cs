@@ -11,6 +11,8 @@ namespace RopeWebApp2.Models
         public string title { get; set; }
         public string structure { get; set; }
         public string method { get; set; }
+        public long averageMemory { get; set; }
+        public long averageTime { get; set; }
         public List<TestDataModel> data { get; set; }
     }
 }
