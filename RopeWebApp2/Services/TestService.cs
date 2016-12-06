@@ -167,6 +167,48 @@ namespace RopeWebApp2.Services
             newTestModel.data = newTestDataModel;
             return newTestModel;
         }
+
+        public TestModel BLInsertTest(int newIterations)
+        {
+            // A test that fills the data structure with the text of war and peace N (newIterations) times, clearing the structure between each fill
+            // --------------- Second data structure: BigList
+            // metadata information
+            newTestModel.title = "BigList";
+            newTestModel.method = ($"Fill empty data structures with a copy of War and Peace; repeat {newIterations} times");
+
+            // create an enumerable structure of the long string, required for the Rope  and BigList constructor
+            newArray = stringLong.ToCharArray();
+
+            // time filling of data structures with a single instance of string
+            // ---------------------------------------------------------------
+            for (int i = 1; i < newIterations + 1; i++)
+            {
+                TestDataModel newTestData = new TestDataModel();
+
+                // get pre-fill memory
+                memStart = GC.GetTotalMemory(true);
+                // start timer
+                sw.Start();
+                biglistLarge = new BigList<char>(newArray);
+                sw.Stop();
+
+                memEnd = GC.GetTotalMemory(false);
+                newTestData.memory = memEnd - memStart;
+                newTestData.time = sw.ElapsedTicks;
+                averageTime += averageTime;
+                averageMemory += averageMemory;
+
+                newTestData.id = i;
+                newTestDataModel.Add(newTestData);
+                sw.Reset();
+            }
+            newTestModel.averageTime = averageTime / newIterations;
+            newTestModel.averageMemory = averageMemory / newIterations;
+            newTestModel.data = newTestDataModel;
+            return newTestModel;
+        }
+
+
         // David - do we need this?
         public TestModel SBInsert()
         {
@@ -181,5 +223,6 @@ namespace RopeWebApp2.Services
             return data;
         }
 
+        // ---------------------------- LIZ - add your code below here
     }
 }
