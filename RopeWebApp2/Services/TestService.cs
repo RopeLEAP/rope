@@ -101,7 +101,7 @@ namespace RopeWebApp2.Services
         // Prepend tests
         public TestModel PrependTest(int newIterations, string structureName)
         {
-            long memStart = 0, memEnd = 0;
+            ReadFiles();
 
             for (int i = 1; i < newIterations + 1; i++)
             {
@@ -157,7 +157,7 @@ namespace RopeWebApp2.Services
         // Insert in middle of structure test
         public TestModel MidInsertTest(int newIterations, string structureName)
         {
-            long memStart = 0, memEnd = 0;
+            ReadFiles();
 
             for (int i = 1; i < newIterations + 1; i++)
             {
