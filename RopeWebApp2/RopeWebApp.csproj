@@ -175,7 +175,9 @@
     <Compile Include="Services\TestService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\app\MainController.js" />
     <Content Include="Content\app\app.js" />
+    <Content Include="Content\app\config.js" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />

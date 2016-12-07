@@ -6,7 +6,7 @@
         .controller('Main', Main);
 
     Main.$inject = ['$http']
-
+        .module('app', ["chart.js"]);
 
     function Main($http) {
         var vm = this;
