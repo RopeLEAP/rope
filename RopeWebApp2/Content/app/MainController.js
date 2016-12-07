@@ -13,6 +13,9 @@
         vm.iterations = null;
         vm.getFillTestResults = getFillTestResults;
         vm.getPrependTestResults = getPrependTestResults;
+        vm.getMidInsertTestResults = getMidInsertTestResults;
+
+
         vm.clearChart = clearChart;
 
         vm.labels = [];
@@ -109,9 +112,10 @@
 
         // MidInsert Tests
         function getMidInsertTestResults() {
-            getBigListMidInsertTestResults();
-            getRopeFillMidInsertResults();
+            //getBigListMidInsertTestResults(); Will cause a stack overflow infinite loop exception
+            getRopeMidInsertTestResults();
             getStringBuilderMidInsertTestResults();
+            makeChartLabels();
         };
 
         function getBigListMidInsertTestResults() {
@@ -119,6 +123,9 @@
             url += vm.iterations;
             $http.get(url).then(function (results) {
                 vm.bigListMidInsertTestData = results.data;
+                makeChartSeries(vm.bigListMidInsertTestData.title);
+                makeChartData(vm.bigListMidInsertTestData.data);
+                console.log("Big List Mid Insert", vm.bigListMidInsertTestData);
             });
         };
 
@@ -127,6 +134,9 @@
             url += vm.iterations;
             $http.get(url).then(function (results) {
                 vm.ropeMidInsertTestData = results.data;
+                makeChartSeries(vm.ropeMidInsertTestData.title);
+                makeChartData(vm.ropeMidInsertTestData.data);
+                console.log("Rope Mid Insert", vm.ropeMidInsertTestData);
             });
         };
 
@@ -135,6 +145,9 @@
             url += vm.iterations;
             $http.get(url).then(function (results) {
                 vm.stringBuilderMidInsertTestData = results.data;
+                makeChartSeries(vm.stringBuilderMidInsertTestData.title);
+                makeChartData(vm.stringBuilderMidInsertTestData.data);
+                console.log("String Builder Mid Insert", vm.stringBuilderMidInsertTestData);
             });
         };
 
