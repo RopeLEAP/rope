@@ -9,22 +9,31 @@
 
     function Main($http) {
         var vm = this;
+
         vm.iterations = null;
         vm.getFillTestResults = getFillTestResults;
+<<<<<<< HEAD
         vm.getPrependTestResults = getPrependTestResults;
+=======
+        vm.clearChart = clearChart;
 
-        vm.labels = ["January", "February", "March", "April", "May", "June", "July"];
-        vm.series = ['Series A', 'Series B'];
-        vm.data = [
-          [65, 59, 80, 81, 56, 55, 40],
-          [28, 48, 40, 19, 86, 27, 90]
-        ];
+        vm.labels = [];
+        vm.series = [];
+        vm.data = [];
+>>>>>>> fd2f5075de0a5e71a7dfc124743329a6c6728821
+
+        function clearChart() {
+            vm.labels.length = 0;
+            vm.series.length = 0;
+            vm.data.length = 0;
+        };
 
         // Fill Tests
         function getFillTestResults() {
             getBigListFillTestResults();
             getRopeFillTestResults();
             getStringBuilderFillTestResults();
+            makeChartLabels();
         };
 
         function getBigListFillTestResults() {
@@ -32,6 +41,9 @@
             url += vm.iterations;
             $http.get(url).then(function (results) {
                 vm.bigListFillTestData = results.data;
+                makeChartSeries(vm.bigListFillTestData.title);
+                makeChartData(vm.bigListFillTestData.data);
+                console.log("Big List Fill", vm.bigListFillTestData);
             });
         };
 
@@ -40,6 +52,9 @@
             url += vm.iterations;
             $http.get(url).then(function (results) {
                 vm.ropeFillTestData = results.data;
+                makeChartSeries(vm.ropeFillTestData.title);
+                makeChartData(vm.ropeFillTestData.data);
+                console.log("Rope Fill:", vm.ropeFillTestData);
             });
         };
 
@@ -48,9 +63,13 @@
             url += vm.iterations;
             $http.get(url).then(function (results) {
                 vm.stringBuilderFillTestData = results.data;
+                makeChartSeries(vm.stringBuilderFillTestData.title);
+                makeChartData(vm.stringBuilderFillTestData.data);
+                console.log("String Builder Fill", vm.stringBuilderFillTestData);
             });
         };
 
+<<<<<<< HEAD
         // Prepend Tests
         function getPrependTestResults() {
             getBigListPrependTestResults();
@@ -112,6 +131,28 @@
                 vm.stringBuilderMidInsertTestData = results.data;
             });
         };
+=======
+        function makeChartLabels() {
+            vm.labels.length = 0;
+            for(var i = 0; i < vm.iterations; i++){
+                vm.labels[i] = i + 1; 
+            };
+
+        };
+
+        function makeChartSeries(title) {
+            vm.series.push(title);
+        };
+
+        function makeChartData(data) {
+            var dataArray = [];
+            for (var i = 0; i < data.length; i++) {
+                dataArray.push(data[i].time);
+            };
+            vm.data.push(dataArray);
+        };
+
+>>>>>>> fd2f5075de0a5e71a7dfc124743329a6c6728821
     };
 
 
