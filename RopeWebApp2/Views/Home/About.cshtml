@@ -26,11 +26,17 @@
                 </tr>
             </tbody>
         </table>
-   
-</div>
 
+    <canvas class="chart chart-line" chart-data="main.data" chart-labels="main.labels"
+            chart-series="main.series"></canvas> 
+
+</div>
 
 @Scripts.Render("~/bundles/jquery")
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/angular.chartjs/latest/angular-chart.min.js"></script>
 <script src="/Content/app/app.js"></script>
+<script src="~/Content/app/config.js"></script>
+<script src="~/Content/app/MainController.js"></script>
