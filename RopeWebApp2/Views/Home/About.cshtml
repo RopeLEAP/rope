@@ -8,24 +8,8 @@
 <div ng-controller="Main as main">
 
     <button ng-click="main.getFillTestResults()">Fill Tests</button>
+    <button ng-click="main.clearChart()">Clear Chart</button>
     <input ng-model="main.iterations"/>
-    @*<h3>{{main.stringBuilderData.method}}</h3>*@
-        @*<table class="table table-striped" ng-show="main.stringBuilderFillTestData">
-            <thead>
-                <tr>
-                    <th>Iteration</th>
-                    <th>Memory</th>
-                    <th>Time</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="test in main.stringBuilderFillTestData.data">
-                    <td>{{test.id}}</td>
-                    <td>{{test.memory}}</td>
-                    <td>{{test.time}}</td>
-                </tr>
-            </tbody>
-        </table>*@
 
     <canvas class="chart chart-line" chart-data="main.data" chart-labels="main.labels"
             chart-series="main.series"></canvas> 
