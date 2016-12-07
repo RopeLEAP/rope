@@ -11,7 +11,7 @@
         var vm = this;
         vm.iterations = null;
         vm.getFillTestResults = getFillTestResults;
-        //vm.getStringBuilderTestResults = getStringBuilderTestResults;
+        vm.getPrependTestResults = getPrependTestResults;
 
         vm.labels = ["January", "February", "March", "April", "May", "June", "July"];
         vm.series = ['Series A', 'Series B'];
@@ -51,6 +51,67 @@
             });
         };
 
+        // Prepend Tests
+        function getPrependTestResults() {
+            getBigListPrependTestResults();
+            getRopeFillPrependResults();
+            getStringBuilderPrependTestResults();
+        };
+
+        function getBigListPrependTestResults() {
+            var url = '/api/BigListApi/GetBigListPrependTestResults?iterations=';
+            url += vm.iterations;
+            $http.get(url).then(function (results) {
+                vm.bigListPrependTestData = results.data;
+            });
+        };
+
+        function getRopePreprendTestResults() {
+            var url = '/api/RopeApi/GetRopePreprendTestResults?iterations=';
+            url += vm.iterations;
+            $http.get(url).then(function (results) {
+                vm.ropePreprendTestData = results.data;
+            });
+        };
+
+        function getStringBuilderPreprendTestResults() {
+            var url = '/api/StringBuilderApi/GetStringBuilderPreprendTestResults?iterations=';
+            url += vm.iterations;
+            $http.get(url).then(function (results) {
+                vm.stringBuilderPreprendTestData = results.data;
+            });
+        };
+
+        // MidInsert Tests
+        function getMidInsertTestResults() {
+            getBigListMidInsertTestResults();
+            getRopeFillMidInsertResults();
+            getStringBuilderMidInsertTestResults();
+        };
+
+        function getBigListMidInsertTestResults() {
+            var url = '/api/BigListApi/GetBigListMidInsertTestResults?iterations=';
+            url += vm.iterations;
+            $http.get(url).then(function (results) {
+                vm.bigListMidInsertTestData = results.data;
+            });
+        };
+
+        function getRopeMidInsertTestResults() {
+            var url = '/api/RopeApi/GetRopeMidInsertTestResults?iterations=';
+            url += vm.iterations;
+            $http.get(url).then(function (results) {
+                vm.ropeMidInsertTestData = results.data;
+            });
+        };
+
+        function getStringBuilderMidInsertTestResults() {
+            var url = '/api/StringBuilderApi/GetStringBuilderMidInsertTestResults?iterations=';
+            url += vm.iterations;
+            $http.get(url).then(function (results) {
+                vm.stringBuilderMidInsertTestData = results.data;
+            });
+        };
     };
 
 
