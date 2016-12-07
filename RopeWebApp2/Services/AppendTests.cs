@@ -23,9 +23,14 @@ namespace RopeWebApp2.Services
             fNumIterations = numIterations;
         }
 
+        public AppendTests() //Maybe Temporary constructor, for the RopeAPI controller...
+        {
+
+        }
+
         // Filepaths
         string warPeace = File.ReadAllText(@"C:\Users\v-elmacc\Documents\RopeProject\warandpeace.txt");
-        string foxSentence = "The quick brown fox jumps over the lazy dog."; // Only use big string.
+        string foxSentence = "The quick brown fox jumps over the lazy dog."; // Only use big string, this won't be hardcoded for a long time.
 
         // Rewrite loops so they keep getting bigger!!
         // Create stopwatch. 
