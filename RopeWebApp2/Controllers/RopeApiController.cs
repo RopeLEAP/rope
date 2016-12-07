@@ -34,5 +34,14 @@ namespace RopeWebApp2.Controllers
             resultRope = testService.MidInsertTest(iterations, "Rope");
             return Request.CreateResponse(HttpStatusCode.OK, resultRope);
         }
+
+        public HttpResponseMessage GetRopeAppendTestResults(int iterations)
+        {
+            TestModel resultRope = new TestModel();
+            TestService testService = new Services.TestService();
+            resultRope = AppendTests // Call your function here! Says AppendTests type is not valid.git 
+            return Request.CreateResponse(HttpStatusCode.OK, resultRope);
+        }
+
     }
 }
