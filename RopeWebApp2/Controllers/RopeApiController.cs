@@ -40,7 +40,7 @@ namespace RopeWebApp2.Controllers
         {
             TestModel resultRope = new TestModel();
             AppendTests appendTest = new AppendTests();
-            resultRope = appendTest.RopeConcatTestCreateRopes();// Call your function here! Rope only -- doesn't like that func returns void.
+            //resultRope = appendTest.RopeConcatTestCreateRopes();// Call your function here! Rope only -- doesn't like that func returns void.
             return Request.CreateResponse(HttpStatusCode.OK, resultRope);
         }
 
