@@ -23,6 +23,7 @@ namespace RopeWebApp2.Services
         static string stringLong;
         // path and reader for file I/O
         string longFilePath = @"c:\repos\files\warandpeace.txt";
+        // create an enumerable structure of the long string
         public string[] newArray;
         public void ReadFiles()
         {
@@ -33,9 +34,7 @@ namespace RopeWebApp2.Services
             }
             newArray = stringLong.Split(" ".ToCharArray());
         }
-        // create an enumerable structure of the long string
-        
-
+ 
         // Make the filled structures available to other tests
         public StringBuilder builderLarge;
         public BigList<string> biglistLarge;
@@ -101,6 +100,7 @@ namespace RopeWebApp2.Services
         // Prepend tests
         public TestModel PrependTest(int newIterations, string structureName)
         {
+            ReadFiles();
             long memStart = 0, memEnd = 0;
 
             for (int i = 1; i < newIterations + 1; i++)
@@ -113,6 +113,7 @@ namespace RopeWebApp2.Services
                     case "StringBuilder":
                         newTestModel.title = "StringBuilder";
                         newTestModel.method = ($"Prepend a copy of War and Peace into data structure; repeat {newIterations} times");
+                        builderLarge = new StringBuilder();
                         sw.Start();
                         builderLarge.Insert(0, stringLong);
                         sw.Stop();
@@ -120,6 +121,7 @@ namespace RopeWebApp2.Services
                     case "BigList":
                         newTestModel.title = "BigList";
                         newTestModel.method = ($"Prepend a copy of War and Peace into data structure; repeat {newIterations} times");
+                        biglistLarge = new BigList<string>();
                         sw.Start();
                         foreach (string letter in newArray)
                         {
@@ -130,6 +132,7 @@ namespace RopeWebApp2.Services
                     case "Rope":
                         newTestModel.title = "Rope";
                         newTestModel.method = ($"Prepend a copy of War and Peace into data structure; repeat {newIterations} times");
+                        ropeLarge = new Rope.Rope<string>(newArray, 0, newArray.Length);
                         sw.Start();
                         ropeLarge.AddRange(newArray, 0, newArray.Length);
                         sw.Stop();
@@ -157,6 +160,7 @@ namespace RopeWebApp2.Services
         // Insert in middle of structure test
         public TestModel MidInsertTest(int newIterations, string structureName)
         {
+            ReadFiles();
             long memStart = 0, memEnd = 0;
 
             for (int i = 1; i < newIterations + 1; i++)
@@ -169,6 +173,7 @@ namespace RopeWebApp2.Services
                     case "StringBuilder":
                         newTestModel.title = "StringBuilder";
                         newTestModel.method = ($"Insert a copy of War and Peace into middle of data structure; repeat {newIterations} times");
+                        builderLarge = new StringBuilder();
                         sw.Start();
                         builderLarge.Insert(builderLarge.Length/2, stringLong);
                         sw.Stop();
@@ -176,6 +181,7 @@ namespace RopeWebApp2.Services
                     case "BigList":
                         newTestModel.title = "BigList";
                         newTestModel.method = ($"Insert a copy of War and Peace into middle of data structure; repeat {newIterations} times");
+                        biglistLarge = new BigList<string>();
                         sw.Start();
                         foreach (string letter in newArray)
                         {
@@ -186,6 +192,7 @@ namespace RopeWebApp2.Services
                     case "Rope":
                         newTestModel.title = "Rope";
                         newTestModel.method = ($"Insert a copy of War and Peace into middle of data structure; repeat {newIterations} times");
+                        ropeLarge = new Rope.Rope<string>(); 
                         sw.Start();
                         ropeLarge.AddRange(newArray, ropeLarge.Length/2, newArray.Length);
                         sw.Stop();

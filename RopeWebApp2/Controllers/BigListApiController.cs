@@ -17,7 +17,7 @@ namespace RopeWebApp2.Controllers
             resultBL = testService.FillTest(iterations, "BigList");
             return Request.CreateResponse(HttpStatusCode.OK, resultBL);
         }
-        public HttpResponseMessage GetBigListIPrependTestResults(int iterations)
+        public HttpResponseMessage GetBigListPrependTestResults(int iterations)
         {
             TestModel resultBL = new TestModel();
             TestService testService = new Services.TestService();
