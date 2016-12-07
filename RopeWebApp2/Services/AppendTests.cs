@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.IO;
+using System.Diagnostics;
+using RopeWebApp2.Models;
+using System.Text;
+using Wintellect.PowerCollections;
 
 namespace RopeWebApp2.Services
 {
@@ -18,9 +23,14 @@ namespace RopeWebApp2.Services
             fNumIterations = numIterations;
         }
 
+        public AppendTests() //Maybe Temporary constructor, for the RopeAPI controller...
+        {
+
+        }
+
         // Filepaths
         string warPeace = File.ReadAllText(@"C:\Users\v-elmacc\Documents\RopeProject\warandpeace.txt");
-        string foxSentence = "The quick brown fox jumps over the lazy dog."; // Only use big string.
+        string foxSentence = "The quick brown fox jumps over the lazy dog."; // Only use big string, this won't be hardcoded for a long time.
 
         // Rewrite loops so they keep getting bigger!!
         // Create stopwatch. 
@@ -31,9 +41,11 @@ namespace RopeWebApp2.Services
         long memEnd = 0;
         long memUsed = 0;
 
-        // Lists of iteration data.
+        // TestModel and TestDataModel are the models for the json object export
         List<TestDataModel> newTestDataModel = new List<TestDataModel>();
         TestModel newTestModel = new TestModel();
+
+        public string json;
 
         // Method to Concatenate Ropes.
         public void RopeConcatTestCreateRopes()
@@ -48,12 +60,12 @@ namespace RopeWebApp2.Services
             // Metadata information.
             structureName = "Rope";
 
-            for (int i = 0; i < fNumReplications; i++)// Probably not replicating..
+            for (int i = 0; i < fNumReplications; i++)
             {
                 for (int j = 0; j < fNumIterations; j++)
                 {
 
-                    TestDataModel newTestData = new TestDataModel();
+                    //TestDataModel newTestData = new TestDataModel();
 
                     // Get memory pre-operation.
                     memStart = GC.GetTotalMemory(true);
@@ -85,16 +97,31 @@ namespace RopeWebApp2.Services
 
                     //Calculate total memory.
                     //memUsed = memEnd - memStart;
+                    /*
                     newTestData.id = i;
                     newTestData.memory = memEnd - memStart;
                     newTestData.time = sw.ElapsedTicks;
                     //Console.WriteLine(memUsed);
-                    Console.WriteLine(newTestData);
+                    */
+
+                    TestDataModel newTestData = new TestDataModel { id = i, memory = (memEnd - memStart), time = sw.ElapsedTicks };
+
+                    //newTestDataModel.Add(newTestData)
+                    /*if (jsonLinesSB == "")
+                    {
+                        jsonLinesSB = json;
+                    }
+                    else
+                    {
+                        jsonLinesSB = jsonLinesSB + ", " + json;
+                    }*/
+                    //Console.WriteLine(newTestData);
 
                     // Append values to each list.
                     //lengths.Add(ropeConcat.Length);
                     //memallocs.Add(memUsed);
                     // runtimes.Add(sw.ElapsedTicks);
+                    Debug.Write(newTestData);
                 }
 
                 // Print averages of ropeConcat.Length, Runtime, for each rep and export to JSON
@@ -103,10 +130,10 @@ namespace RopeWebApp2.Services
                 Console.WriteLine("Length of new rope: " + lengths.Sum() / lengths.Count() + " words" +
                         "\nRuntime: " + runtimes.Sum() / lengths.Count() + " ms" +
                         "\nMemory used: " + memallocs.Sum() / memallocs.Count() + " bytes");*/
+                
             }
         }
-
-        // Standard String Concatenate
+        /* COMMENTS OUT OTHER METHODS FOR THE MOMENT!!!
         public void StringConcatReadStrings()
         {
             // Lists to calculate averages.
@@ -265,6 +292,6 @@ namespace RopeWebApp2.Services
 
             // Read Results.
             Console.ReadLine();
-        }
+        }*/ //COMMENTS OUT OTHER METHODS
     }
 }
