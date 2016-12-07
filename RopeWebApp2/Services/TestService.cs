@@ -23,6 +23,7 @@ namespace RopeWebApp2.Services
         static string stringLong;
         // path and reader for file I/O
         string longFilePath = @"c:\repos\files\warandpeace.txt";
+        public string[] newArray;
         public void ReadFiles()
         {
             using (StreamReader readLongFile = new StreamReader(longFilePath))
@@ -30,14 +31,15 @@ namespace RopeWebApp2.Services
                 // read in long string file; create data structures to be tested
                 stringLong = File.ReadAllText(longFilePath);
             }
+            newArray = stringLong.Split(" ".ToCharArray());
         }
         // create an enumerable structure of the long string
-        public char[] newArray;
+        
 
         // Make the filled structures available to other tests
         public StringBuilder builderLarge;
-        public BigList<char> biglistLarge;
-        public Rope.Rope<char> ropeLarge;
+        public BigList<string> biglistLarge;
+        public Rope.Rope<string> ropeLarge;
 
         // TestModel and TestDataModel are the models for the json object export
         List<TestDataModel> newTestDataModel = new List<TestDataModel>();
@@ -47,6 +49,7 @@ namespace RopeWebApp2.Services
         // Fill tests
         public TestModel FillTest(int newIterations, string structureName)
         {
+            ReadFiles();
             for (int i = 1; i < newIterations + 1; i++)
             {
                 // get pre-fill memory
@@ -65,14 +68,14 @@ namespace RopeWebApp2.Services
                         newTestModel.title = "BigList";
                         newTestModel.method = ($"Fill empty data structures with a copy of War and Peace; repeat {newIterations} times");
                         sw.Start();
-                        biglistLarge = new BigList<char>(newArray);
+                        biglistLarge = new BigList<string>(newArray);
                         sw.Stop();
                         break;
                     case "Rope":
                         newTestModel.title = "Rope";
                         newTestModel.method = ($"Fill empty data structures with a copy of War and Peace; repeat {newIterations} times");
                         sw.Start();
-                        ropeLarge = new Rope.Rope<char>(newArray, 0, newArray.Length);
+                        ropeLarge = new Rope.Rope<string>(newArray, 0, newArray.Length);
                         sw.Stop();
                         break;
                 }
@@ -118,7 +121,7 @@ namespace RopeWebApp2.Services
                         newTestModel.title = "BigList";
                         newTestModel.method = ($"Prepend a copy of War and Peace into data structure; repeat {newIterations} times");
                         sw.Start();
-                        foreach (char letter in newArray)
+                        foreach (string letter in newArray)
                         {
                             biglistLarge.Insert(0, letter);
                         }
@@ -174,7 +177,7 @@ namespace RopeWebApp2.Services
                         newTestModel.title = "BigList";
                         newTestModel.method = ($"Insert a copy of War and Peace into middle of data structure; repeat {newIterations} times");
                         sw.Start();
-                        foreach (char letter in newArray)
+                        foreach (string letter in newArray)
                         {
                             biglistLarge.Insert(biglistLarge.Count/2, letter);
                         }
