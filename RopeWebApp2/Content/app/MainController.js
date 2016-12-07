@@ -12,15 +12,12 @@
 
         vm.iterations = null;
         vm.getFillTestResults = getFillTestResults;
-<<<<<<< HEAD
         vm.getPrependTestResults = getPrependTestResults;
-=======
         vm.clearChart = clearChart;
 
         vm.labels = [];
         vm.series = [];
         vm.data = [];
->>>>>>> fd2f5075de0a5e71a7dfc124743329a6c6728821
 
         function clearChart() {
             vm.labels.length = 0;
@@ -69,12 +66,12 @@
             });
         };
 
-<<<<<<< HEAD
         // Prepend Tests
         function getPrependTestResults() {
             getBigListPrependTestResults();
-            getRopeFillPrependResults();
+            getRopePrependTestResults();
             getStringBuilderPrependTestResults();
+            makeChartLabels();
         };
 
         function getBigListPrependTestResults() {
@@ -82,22 +79,31 @@
             url += vm.iterations;
             $http.get(url).then(function (results) {
                 vm.bigListPrependTestData = results.data;
+                makeChartSeries(vm.bigListPrependTestData.title);
+                makeChartData(vm.bigListPrependTestData.data);
+                console.log("Big List Pre-pend", vm.bigListPrependTestData);
             });
         };
 
-        function getRopePreprendTestResults() {
-            var url = '/api/RopeApi/GetRopePreprendTestResults?iterations=';
+        function getRopePrependTestResults() {
+            var url = '/api/RopeApi/GetRopePrependTestResults?iterations=';
             url += vm.iterations;
             $http.get(url).then(function (results) {
-                vm.ropePreprendTestData = results.data;
+                vm.ropePrependTestData = results.data;
+                makeChartSeries(vm.ropePrependTestData.title);
+                makeChartData(vm.ropePrependTestData.data);
+                console.log("Rope Pre-pend", vm.ropePrependTestData);
             });
         };
 
-        function getStringBuilderPreprendTestResults() {
-            var url = '/api/StringBuilderApi/GetStringBuilderPreprendTestResults?iterations=';
+        function getStringBuilderPrependTestResults() {
+            var url = '/api/StringBuilderApi/GetStringBuilderPrependTestResults?iterations=';
             url += vm.iterations;
             $http.get(url).then(function (results) {
-                vm.stringBuilderPreprendTestData = results.data;
+                vm.stringBuilderPrependTestData = results.data;
+                makeChartSeries(vm.stringBuilderPrependTestData.title);
+                makeChartData(vm.stringBuilderPrependTestData.data);
+                console.log("String Builder Pre-pend", vm.stringBuilderPrependTestData);
             });
         };
 
@@ -131,7 +137,7 @@
                 vm.stringBuilderMidInsertTestData = results.data;
             });
         };
-=======
+
         function makeChartLabels() {
             vm.labels.length = 0;
             for(var i = 0; i < vm.iterations; i++){
@@ -152,7 +158,6 @@
             vm.data.push(dataArray);
         };
 
->>>>>>> fd2f5075de0a5e71a7dfc124743329a6c6728821
     };
 
 
