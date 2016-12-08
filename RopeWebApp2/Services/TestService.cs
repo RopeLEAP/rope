@@ -123,10 +123,7 @@ namespace RopeWebApp2.Services
                         newTestModel.method = ($"Prepend a copy of War and Peace into data structure; repeat {newIterations} times");
                         biglistLarge = new BigList<string>();
                         sw.Start();
-                        foreach (string letter in newArray)
-                        {
-                            biglistLarge.Insert(0, letter);
-                        }
+                        biglistLarge.Insert(0, stringLong);
                         sw.Stop();
                         break;
                     case "Rope":
@@ -183,10 +180,7 @@ namespace RopeWebApp2.Services
                         newTestModel.method = ($"Insert a copy of War and Peace into middle of data structure; repeat {newIterations} times");
                         biglistLarge = new BigList<string>();
                         sw.Start();
-                        foreach (string letter in newArray)
-                        {
-                            biglistLarge.Insert(biglistLarge.Count/2, letter);
-                        }
+                        biglistLarge.Insert(biglistLarge.Count/2, stringLong);
                         sw.Stop();
                         break;
                     case "Rope":

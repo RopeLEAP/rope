@@ -12,6 +12,8 @@
 
         vm.iterations = null;
         vm.showErrorMessage = false;
+        vm.graphTitle = null;
+
         vm.getFillTestResults = getFillTestResults;
         vm.getPrependTestResults = getPrependTestResults;
         vm.getMidInsertTestResults = getMidInsertTestResults;
@@ -20,19 +22,27 @@
 
         vm.clearChart = clearChart;
 
-        vm.labels = [];
-        vm.series = [];
-        vm.data = [];
+        vm.timeLabels = [];
+        vm.timeSeries = [];
+        vm.timeData = [];
+
+        vm.memoryLabels = [];
+        vm.memorySeries = [];
+        vm.memoryData = [];
 
         function clearChart() {
-            vm.labels.length = 0;
-            vm.series.length = 0;
-            vm.data.length = 0;
-            vm.showErrorMessage = false;
+            vm.timeLabels.length = 0;
+            vm.timeSeries.length = 0;
+            vm.timeData.length = 0;
+
+            vm.memoryLabels.length = 0;
+            vm.memorySeries.length = 0;
+            vm.memoryData.length = 0;
         };
 
         // Fill Tests
         function getFillTestResults() {
+            vm.graphTitle = "Fill Test";
             clearChart();
             getBigListFillTestResults();
             getRopeFillTestResults();
@@ -75,6 +85,7 @@
 
         // Prepend Tests
         function getPrependTestResults() {
+            vm.graphTitle = "Prepend Test";
             clearChart();
             getBigListPrependTestResults();
             getRopePrependTestResults();
@@ -115,14 +126,14 @@
             });
         };
 
-        // MidInsert Tests
+        // Mid Insert Tests
         function getMidInsertTestResults() {
+            vm.graphTitle = "Mid Insert";
             clearChart();
-            //getBigListMidInsertTestResults(); Will cause a stack overflow infinite loop exception
+            getBigListMidInsertTestResults();// Will cause a stack overflow infinite loop exception
             getRopeMidInsertTestResults();
             getStringBuilderMidInsertTestResults();
             makeChartLabels();
-            vm.showErrorMessage = true;
         };
 
         function getBigListMidInsertTestResults() {
@@ -159,23 +170,29 @@
         };
 
         function makeChartLabels() {
-            vm.labels.length = 0;
+            vm.timeLabels.length = 0;
+            vm.memoryLabels.length = 0;
             for(var i = 0; i < vm.iterations; i++){
-                vm.labels[i] = i + 1; 
+                vm.timeLabels[i] = i + 1;
+                vm.memoryLabels[i] = i + 1;
             };
 
         };
 
         function makeChartSeries(title) {
-            vm.series.push(title);
+            vm.timeSeries.push(title);
+            vm.memorySeries.push(title);
         };
 
         function makeChartData(data) {
-            var dataArray = [];
+            var timeDataArray = [];
+            var memoryDataArray = [];
             for (var i = 0; i < data.length; i++) {
-                dataArray.push(data[i].time);
+                timeDataArray.push(data[i].time);
+                memoryDataArray.push(data[i].memory);
             };
-            vm.data.push(dataArray);
+            vm.timeData.push(timeDataArray);
+            vm.memoryData.push(memoryDataArray);
         };
 
     };
