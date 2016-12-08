@@ -3,7 +3,7 @@
 }
 
 <h1>LeapRope() – a rope data structure</h1>
-<h2>Comparative performance tests with string(), stringbuilder(), and biglist()</h2>
+<h2>Comparative performance tests with Rope(), StringBuilder(), and BigList()</h2>
 
 
 
@@ -14,10 +14,14 @@
     <button class="btn btn-primary btn-lg" ng-click="main.getMidInsertTestResults()">Mid Insert Test</button>
     
     <input class="input-lg" ng-model="main.iterations" />
+    <h1>{{main.graphTitle}}</h1>
+    <canvas class="chart chart-line" style="margin-top:20px;" chart-data="main.timeData" chart-labels="main.timeLabels"
+            chart-series="main.timeSeries"></canvas>
+
+    @*<canvas class="chart chart-line" style="margin-top:20px;" chart-data="main.memoryData" chart-labels="main.memoryLabels"
+            chart-series="main.memorySeries"></canvas>*@
 
 
-    <canvas class="chart chart-line" style="margin-top:20px;" chart-data="main.data" chart-labels="main.labels"
-            chart-series="main.series"></canvas>
 
 </div>
 
