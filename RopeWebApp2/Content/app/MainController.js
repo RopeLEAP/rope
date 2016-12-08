@@ -28,7 +28,6 @@
             vm.labels.length = 0;
             vm.series.length = 0;
             vm.data.length = 0;
-            vm.showErrorMessage = false;
         };
 
         // Fill Tests
@@ -118,11 +117,10 @@
         // MidInsert Tests
         function getMidInsertTestResults() {
             clearChart();
-            //getBigListMidInsertTestResults(); Will cause a stack overflow infinite loop exception
+            getBigListMidInsertTestResults();// Will cause a stack overflow infinite loop exception
             getRopeMidInsertTestResults();
             getStringBuilderMidInsertTestResults();
             makeChartLabels();
-            vm.showErrorMessage = true;
         };
 
         function getBigListMidInsertTestResults() {
