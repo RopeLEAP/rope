@@ -11,9 +11,11 @@
         var vm = this;
 
         vm.iterations = null;
+        vm.showErrorMessage = false;
         vm.getFillTestResults = getFillTestResults;
         vm.getPrependTestResults = getPrependTestResults;
         vm.getMidInsertTestResults = getMidInsertTestResults;
+
 
 
         vm.clearChart = clearChart;
@@ -26,10 +28,12 @@
             vm.labels.length = 0;
             vm.series.length = 0;
             vm.data.length = 0;
+            vm.showErrorMessage = false;
         };
 
         // Fill Tests
         function getFillTestResults() {
+            clearChart();
             getBigListFillTestResults();
             getRopeFillTestResults();
             getStringBuilderFillTestResults();
@@ -71,6 +75,7 @@
 
         // Prepend Tests
         function getPrependTestResults() {
+            clearChart();
             getBigListPrependTestResults();
             getRopePrependTestResults();
             getStringBuilderPrependTestResults();
@@ -112,10 +117,12 @@
 
         // MidInsert Tests
         function getMidInsertTestResults() {
+            clearChart();
             //getBigListMidInsertTestResults(); Will cause a stack overflow infinite loop exception
             getRopeMidInsertTestResults();
             getStringBuilderMidInsertTestResults();
             makeChartLabels();
+            vm.showErrorMessage = true;
         };
 
         function getBigListMidInsertTestResults() {
