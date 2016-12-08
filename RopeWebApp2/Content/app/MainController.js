@@ -17,6 +17,7 @@
         vm.getFillTestResults = getFillTestResults;
         vm.getPrependTestResults = getPrependTestResults;
         vm.getMidInsertTestResults = getMidInsertTestResults;
+        vm.getAppendTestResults = getAppendTestResults;
 
 
 
@@ -38,6 +39,49 @@
             vm.memoryLabels.length = 0;
             vm.memorySeries.length = 0;
             vm.memoryData.length = 0;
+        };
+
+        // Append Tests
+        function getAppendTestResults() {
+            vm.graphTitle = "Append Test";
+            clearChart();
+            getBigListAppendTestResults();
+            getRopeAppendTestResults();
+            getStringBuilderAppendTestResults();
+            makeChartLabels();
+        };
+
+        function getBigListAppendTestResults() {
+            var url = '/api/BigListApi/getBigListAppendTestResults?iterations=';
+            url += vm.iterations;
+            $http.get(url).then(function (results) {
+                vm.bigListAppendTestData = results.data;
+                makeChartSeries(vm.bigListAppendTestData.title);
+                makeChartData(vm.bigListAppendTestData.data);
+                console.log("Big List Append", vm.bigListAppendTestData);
+            });
+        };
+
+        function getRopeAppendTestResults() {
+            var url = '/api/RopeApi/getRopeAppendTestResults?iterations=';
+            url += vm.iterations;
+            $http.get(url).then(function (results) {
+                vm.ropeAppendTestData = results.data;
+                makeChartSeries(vm.ropeAppendTestData.title);
+                makeChartData(vm.ropeAppendTestData.data);
+                console.log("Rope Append", vm.ropeAppendTestData);
+            });
+        };
+
+        function getStringBuilderAppendTestResults() {
+            var url = '/api/StringBuilderApi/getStringBuilderAppendTestResults?iterations=';
+            url += vm.iterations;
+            $http.get(url).then(function (results) {
+                vm.stringBuilderAppendTestData = results.data;
+                makeChartSeries(vm.stringBuilderAppendTestData.title);
+                makeChartData(vm.stringBuilderAppendTestData.data);
+                console.log("String Builder Append", vm.stringBuilderAppendTestData);
+            });
         };
 
         // Fill Tests
