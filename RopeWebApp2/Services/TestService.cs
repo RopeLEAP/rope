@@ -230,5 +230,86 @@ namespace RopeWebApp2.Services
             }
             return data;
         }
+
+        public TestModel AppendTest(int newIterations, string structureName)
+        {
+            // Function that read in the file(s) to test.
+            ReadFiles();
+
+            // Initialize variables that will store memory at 0.
+            long memStart = 0;
+            long memEnd = 0;
+
+            // Appends a file to the specified data structure i number of times.
+            for (int i = 1; i < newIterations + 1; i++)
+            {
+                // Get pre-operation memory.
+                memStart = GC.GetTotalMemory(true);
+
+                switch (structureName)
+                {
+
+                    // Appends a rope repeatedly to another rope.
+                    case "Rope":
+                        newTestModel.title = "Rope";
+                        newTestModel.method = ($"Append a copy of War and Peace to the end of the data structure; repeat {newIterations} times");
+                        ropeLarge = new Rope.Rope<string>();
+                        sw.Start();
+                        ropeLarge.AddRange(newArray, ropeLarge.Length, newArray.Length);
+                        sw.Stop();
+                        break;
+
+                    // Appends a string repeatedly to a stringbuilder.
+                    case "StringBuilder":
+                        newTestModel.title = "StringBuilder";
+                        newTestModel.method = ($"Append a copy of War and Peace to the end of the data structure; repeat {newIterations} times");
+                        builderLarge = new StringBuilder();
+                        sw.Start();
+                        builderLarge.Append(stringLong);
+                        sw.Stop();
+                        break;
+
+                    case "BigList":
+                        newTestModel.title = "BigList";
+                        newTestModel.method = ($"Append a copy of War and Peace to the end of the data structure; repeat {newIterations} times");
+                        biglistLarge = new BigList<string>();
+                        sw.Start();
+                        //foreach (string letter in newArray) Don't understanf why foreach loop is here...
+                        //{
+                            biglistLarge.Add(stringLong);
+                        //}
+                        sw.Stop();
+                        break;     
+                }
+
+                //Get Memory post operations.
+                memEnd = GC.GetTotalMemory(false);
+
+                TestDataModel newTestData = new TestDataModel { id = i, memory = (memEnd - memStart), time = sw.ElapsedTicks };
+
+                // Gets sum of time and memory
+                averageTime += newTestData.time;
+                averageMemory += newTestData.memory;
+
+                newTestDataModel.Add(newTestData);
+                sw.Reset();
+            }
+            newTestModel.averageTime = averageTime / newIterations;
+            newTestModel.averageMemory = averageMemory / newIterations;
+            newTestModel.data = newTestDataModel;
+            return newTestModel;
+        }
+
+        // Concat rope vs string?  
+
+        /*  case "String":
+              newTestModel.title = "StringBuilder";
+              newTestModel.method = ($"Insert a copy of War and Peace into middle of data structure; repeat {newIterations} times");
+              builderLarge = new StringBuilder();
+              sw.Start();
+              builderLarge.Insert(builderLarge.Length / 2, stringLong);
+              sw.Stop();
+              break;s
+              */
     }
 }

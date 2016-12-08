@@ -35,12 +35,13 @@ namespace RopeWebApp2.Controllers
             return Request.CreateResponse(HttpStatusCode.OK, resultRope);
         }
 
-        // This controller calls the rope concat test and sends response.
+        // This method calls the rope append test and sends results.
         public HttpResponseMessage GetRopeAppendTestResults(int iterations)
         {
+            
             TestModel resultRope = new TestModel();
-            AppendTests appendTest = new AppendTests();
-            //resultRope = appendTest.RopeConcatTestCreateRopes();// Call your function here! Rope only -- doesn't like that func returns void.
+            TestService testService = new TestService();
+            resultRope = testService.AppendTest(iterations, "Rope");
             return Request.CreateResponse(HttpStatusCode.OK, resultRope);
         }
 

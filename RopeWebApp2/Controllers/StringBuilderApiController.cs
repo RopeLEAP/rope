@@ -33,5 +33,15 @@ namespace RopeWebApp2.Controllers
             resultSB = testService.MidInsertTest(iterations, "StringBuilder");
             return Request.CreateResponse(HttpStatusCode.OK, resultSB);
         }
+
+        // This method calls the Stringbuilder append test and sends results.
+        public HttpResponseMessage GetStringBuilderAppendTestResults(int iterations)
+        {
+            TestModel resultSB = new TestModel();
+            TestService testService = new TestService();
+            testService.ReadFiles();
+            resultSB = testService.AppendTest(iterations, "StringBuilder");
+            return Request.CreateResponse(HttpStatusCode.OK, resultSB);
+        }
     }
 }

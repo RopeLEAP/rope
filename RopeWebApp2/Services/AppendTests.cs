@@ -12,6 +12,7 @@ namespace RopeWebApp2.Services
 {
     public class AppendTests
     {
+       /*
         // Fields to set number of iterations in each test and how many replications. 
         int fNumIterations;
         int fNumReplications;
@@ -51,11 +52,11 @@ namespace RopeWebApp2.Services
         public void RopeConcatTestCreateRopes()
         {
             // Lists to calculate averages. See if you can declare these once and reset? Don't calculate averages! Try to break!
-            /*
-            List<int> lengths = new List<int>();
-            List<double> memallocs = new List<double>();
-            List<double> runtimes = new List<double>();
-            */
+            
+            //List<int> lengths = new List<int>();
+            //List<double> memallocs = new List<double>();
+            //List<double> runtimes = new List<double>();
+            
 
             // Metadata information.
             structureName = "Rope";
@@ -102,7 +103,7 @@ namespace RopeWebApp2.Services
                     newTestData.memory = memEnd - memStart;
                     newTestData.time = sw.ElapsedTicks;
                     //Console.WriteLine(memUsed);
-                    */
+                    
 
                     TestDataModel newTestData = new TestDataModel { id = i, memory = (memEnd - memStart), time = sw.ElapsedTicks };
 
@@ -114,7 +115,7 @@ namespace RopeWebApp2.Services
                     else
                     {
                         jsonLinesSB = jsonLinesSB + ", " + json;
-                    }*/
+                    }
                     //Console.WriteLine(newTestData);
 
                     // Append values to each list.
@@ -126,14 +127,14 @@ namespace RopeWebApp2.Services
 
                 // Print averages of ropeConcat.Length, Runtime, for each rep and export to JSON
                 // Print time will need to be JSON EXPORT!
-                /*
+               
                 Console.WriteLine("Length of new rope: " + lengths.Sum() / lengths.Count() + " words" +
                         "\nRuntime: " + runtimes.Sum() / lengths.Count() + " ms" +
-                        "\nMemory used: " + memallocs.Sum() / memallocs.Count() + " bytes");*/
+                        "\nMemory used: " + memallocs.Sum() / memallocs.Count() + " bytes");
                 
             }
         }
-        /* COMMENTS OUT OTHER METHODS FOR THE MOMENT!!!
+      
         public void StringConcatReadStrings()
         {
             // Lists to calculate averages.
@@ -292,6 +293,7 @@ namespace RopeWebApp2.Services
 
             // Read Results.
             Console.ReadLine();
-        }*/ //COMMENTS OUT OTHER METHODS
+        }
+       */
     }
 }

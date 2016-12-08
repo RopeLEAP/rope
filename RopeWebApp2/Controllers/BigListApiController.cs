@@ -33,5 +33,16 @@ namespace RopeWebApp2.Controllers
             resultBL = testService.MidInsertTest(iterations, "BigList");
             return Request.CreateResponse(HttpStatusCode.OK, resultBL);
         }
+
+
+        // This method calls the Stringbuilder append test and sends results.
+        public HttpResponseMessage GetBigListAppendTestResults(int iterations)
+        {
+            TestModel resultBL = new TestModel();
+            TestService testService = new TestService();
+            testService.ReadFiles();
+            resultBL = testService.AppendTest(iterations, "BigList");
+            return Request.CreateResponse(HttpStatusCode.OK, resultBL);
+        }
     }
 }
